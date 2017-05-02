@@ -1,0 +1,2 @@
+# libterminus
+All-purpose library
