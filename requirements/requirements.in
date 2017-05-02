@@ -1,0 +1,8 @@
+# core
+pyjwt
+
+# test
+coverage
+flake8
+pytest
+pytest-cov
