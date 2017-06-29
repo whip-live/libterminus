@@ -90,7 +90,8 @@ def test_logging_adapter_device_id():
 
 def test_jwt_without_username():
     data = {
-        'email': 'test@test.com'
+        'email': 'test@test.com',
+        'user_id': '123456'
     }
     encoded_jwt = pyjwt.encode(data, '123456', algorithm='HS256')
     jwt = {
@@ -99,5 +100,5 @@ def test_jwt_without_username():
     logger = logging.getLogger()
     adapter = RecordingAdapter(logger, None)
     log_result = adapter.process('test msg', jwt)
-    exepcted = ('test msg', {'extra': {'jwt': ''}})
+    exepcted = ('test msg', {'extra': {'jwt': '123456'}})
     assert log_result == exepcted
