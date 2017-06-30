@@ -11,7 +11,7 @@ def get_user_from_jwt(token):
     if 'username' in decoded_payload:
         return decoded_payload['username']
     else:
-        return ''
+        return decoded_payload['user_id']
 
 
 class RecordingAdapter(LoggerAdapter):
