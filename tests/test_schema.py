@@ -1,18 +1,11 @@
 import datetime
 
-from terminus.schema import BaseSchema, DeviceDataSchema, RecordingSchema
-
-
-def test_base_schema(encoded_jwt):
-    """
-    Test the base schema
-    """
-    data = {
-        'jwt': encoded_jwt,
-        'typology': 'moto'
-    }
-    result = BaseSchema().load(data)
-    assert result.errors == {}
+from terminus.schema import (
+    DeviceDataSchema,
+    RecordingSchema,
+    MatchRecordingSchema,
+    MatchIndexSchema,
+)
 
 
 def test_device_data_schema(encoded_jwt):
@@ -159,3 +152,58 @@ def test_schema_with_invalid_typology(encoded_jwt):
     }
     result = RecordingSchema().load(data)
     assert result.errors == {'typology': ['Invalid Typology']}
+
+
+def test_match_recording_schema():
+    """
+    Test the MatchRecordingSchema
+    """
+    data = {
+        'id': '653a4136-e378-4790-809a-01cffe30e3ed',
+        'bbox': (0, 0, 1, 1),
+        'path': {
+            'coordinates': [
+                [0.00001, 0.00001],
+                [0.00002, 0.00002],
+                [0.00003, 0.00003]
+            ]
+        },
+        'sectors': [
+            {'id': '4fe8c832-13be-43b1-b358-3558d32f4b82', 'name': 'Sector 1', 'start_index': 1, 'end_index': 2},
+            {'id': 'baa9ec35-c982-4934-a72b-fc3565313802', 'name': 'Sector 2', 'start_index': 2, 'end_index': 3},
+            {'id': '98f211b7-3fd6-4843-8b0a-75033373e38c', 'name': 'Sector 3', 'start_index': 3, 'end_index': 4}
+        ]
+    }
+    result = MatchRecordingSchema(exclude=('jwt', )).load(data)
+    assert result.errors == {}
+
+
+def test_match_recording_schema_without_some_fields(encoded_jwt):
+    """
+    Test the MatchRecordingSchema
+    """
+    data = {
+        'jwt': encoded_jwt,
+        'id': '653a4136-e378-4790-809a-01cffe30e3ed',
+        'bbox': (0, 0, 1, 1),
+        'path': {
+            'coordinates': [
+                [0.00001, 0.00001],
+                [0.00002, 0.00002],
+                [0.00003, 0.00003]
+            ]
+        },
+        'points': [
+            {'position': 'POINT(0.0002 0.0002)'},
+            {'position': 'POINT(0.0003 0.0003)'},
+            {'position': 'POINT(0.0004 0.0004)'},
+        ]
+    }
+    result = MatchRecordingSchema(exclude=('sectors', )).load(data)
+    assert result.errors == {}
+
+
+def test_match_segment_schema():
+    data = {'segment_id': [(0, 2)]}
+    result = MatchIndexSchema().load(data)
+    assert result.errors == {}
