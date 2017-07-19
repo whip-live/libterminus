@@ -1,17 +1,7 @@
-import pytest
-
-import jwt as pyjwt
 import logging
+import jwt as pyjwt
 
 from terminus import RecordingAdapter
-
-
-@pytest.fixture
-def encoded_jwt():
-    data = {
-        'username': 'user',
-    }
-    return pyjwt.encode(data, '123456', algorithm='HS256')
 
 
 def test_logging_adapter(encoded_jwt):
