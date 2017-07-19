@@ -151,7 +151,7 @@ def test_schema_with_invalid_typology(encoded_jwt):
             }]
     }
     result = RecordingSchema().load(data)
-    assert result.errors == {'typology': ['Invalid Typology']}
+    assert result.errors == {'typology': ['Not a valid choice.']}
 
 
 def test_match_recording_schema():

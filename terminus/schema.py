@@ -1,30 +1,18 @@
 import jwt
 
-from marshmallow import fields, Schema, validates, ValidationError
+from marshmallow import fields, Schema, validate, ValidationError
 
 
-class Typology(Schema):
-    typology = fields.Field(required=True)
-
-    @validates('typology')
-    def validate_typology(self, value):
-        typology = ['moto', 'bike']
-        if value not in typology:
-            raise ValidationError('Invalid Typology')
+def validate_jwt(data):
+    try:
+        jwt.decode(data, verify=False, algorithms=['HS256'])
+    except jwt.exceptions.DecodeError:
+        raise ValidationError('Invalid JWT')
 
 
-class JWT(Schema):
-    jwt = fields.Field(required=True)
-
-    @validates('jwt')
-    def validate_jwt(self, value):
-        try:
-            jwt.decode(value, verify=False, algorithms=['HS256'])
-        except jwt.exceptions.DecodeError:
-            raise ValidationError('Invalid JWT')
-
-
-class DeviceDataSchema(Typology, JWT):
+class DeviceDataSchema(Schema):
+    jwt = fields.Field(required=True, validate=validate_jwt)
+    typology = fields.String(required=True, validate=validate.OneOf(['moto', 'bike']))
     device_id = fields.UUID(required=True)
     recording_id = fields.UUID(required=True)
     user_id = fields.UUID(required=True)
@@ -46,7 +34,9 @@ class PointSchema(Schema):
     pdop = fields.Float()
 
 
-class RecordingSchema(Typology, JWT):
+class RecordingSchema(Schema):
+    jwt = fields.Field(required=True, validate=validate_jwt)
+    typology = fields.String(required=True, validate=validate.OneOf(['moto', 'bike']))
     id = fields.UUID(required=True)
     started = fields.Integer(required=True)
     ended = fields.Integer(required=True)
@@ -60,8 +50,9 @@ class SectorSchema(Schema):
     end_index = fields.Integer()
 
 
-class MatchRecordingSchema(JWT):
+class MatchRecordingSchema(Schema):
     id = fields.UUID(required=True)
+    jwt = fields.Field(required=True, validate=validate_jwt)
     bbox = fields.List(fields.Decimal())
     path = fields.Dict()
     sectors = fields.Nested(SectorSchema, many=True)
