@@ -30,8 +30,8 @@ def test_schema_with_valid_data(encoded_jwt):
     """
     data = {
         'id': '01a61386-53ae-43bd-8586-d09acf88b391',
-        'started': 232323,
-        'ended': 23232,
+        'started': datetime.datetime.now().isoformat(),
+        'ended': datetime.datetime.now().isoformat(),
         'typology': 'moto',
         'jwt': encoded_jwt,
         'points': [
@@ -72,8 +72,8 @@ def test_schema_with_invalid_jwt():
     """
     data = {
         'id': '01a61386-53ae-43bd-8586-d09acf88b391',
-        'started': 232323,
-        'ended': 23232,
+        'started': datetime.datetime.now().isoformat(),
+        'ended': datetime.datetime.now().isoformat(),
         'typology': 'moto',
         'jwt': 'aaa.bbb.ccc',
         'points': [
@@ -118,8 +118,8 @@ def test_schema_with_invalid_typology(encoded_jwt):
         'activity_id': '0b119ed7-7333-46a0-ada1-c469a610ddd0',
         'user_id': 'efbbb33c-f143-4f2d-a2f4-9d5d41df7d85',
         'recording_id': 'd856a420-a04f-4328-b22e-d8f7bb12904a',
-        'started': 232323,
-        'ended': 23232,
+        'started': datetime.datetime.now().isoformat(),
+        'ended': datetime.datetime.now().isoformat(),
         'typology': 'foo',
         'jwt': encoded_jwt,
         'points': [

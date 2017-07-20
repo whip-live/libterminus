@@ -3,9 +3,9 @@ import jwt
 from marshmallow import fields, Schema, validate, ValidationError
 
 
-def validate_jwt(data):
+def validate_jwt(value):
     try:
-        jwt.decode(data, verify=False, algorithms=['HS256'])
+        jwt.decode(value, verify=False, algorithms=['HS256'])
     except jwt.exceptions.DecodeError:
         raise ValidationError('Invalid JWT')
 
@@ -38,8 +38,8 @@ class RecordingSchema(Schema):
     jwt = fields.Field(required=True, validate=validate_jwt)
     typology = fields.String(required=True, validate=validate.OneOf(['moto', 'bike']))
     id = fields.UUID(required=True)
-    started = fields.Integer(required=True)
-    ended = fields.Integer(required=True)
+    started = fields.DateTime(required=True)
+    ended = fields.DateTime(required=True)
     points = fields.Nested(PointSchema, many=True)
 
 
