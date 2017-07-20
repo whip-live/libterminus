@@ -55,8 +55,18 @@ class MatchRecordingSchema(Schema):
     jwt = fields.Field(required=True, validate=validate_jwt)
     bbox = fields.List(fields.Decimal())
     path = fields.Dict()
-    sectors = fields.Nested(SectorSchema, many=True)
     points = fields.List(fields.Dict())
+
+
+class MatchSchema(Schema):
+    indexes = fields.List(fields.Field(), required=True)
+    bbox = fields.List(fields.Integer(), required=True)
+    path = fields.Dict(required=True)
+    sectors = fields.Nested(SectorSchema, many=True)
+
+
+class MatchingSegments(Schema):
+    segment_id = fields.Nested(MatchSchema)
 
 
 class MatchIndexSchema(Schema):
