@@ -27,7 +27,7 @@ class PointSchema(Schema):
     speed = fields.Float()
     position = fields.Field()
     geoidheight = fields.Float()
-    fix = fields.String()
+    fix = fields.Integer(validate=validate.Range(min=0, max=8))
     sat = fields.Integer()
     hdop = fields.Float()
     vdop = fields.Float()
