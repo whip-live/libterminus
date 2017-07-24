@@ -65,7 +65,7 @@ class MatchSchema(Schema):
     sectors = fields.Nested(SectorSchema, many=True)
 
 
-class MatchingSegments(Schema):
+class MatchingSegmentSchema(Schema):
     segment_id = fields.Nested(MatchSchema)
 
 

@@ -4,7 +4,7 @@ from terminus.schema import (
     DeviceDataSchema,
     RecordingSchema,
     MatchRecordingSchema,
-    MatchingSegments,
+    MatchingSegmentSchema,
     MatchIndexSchema,
 )
 
@@ -178,7 +178,7 @@ def test_match_recording_schema():
             ]
         }
     }
-    result = MatchingSegments().load(data)
+    result = MatchingSegmentSchema().load(data)
     assert result.errors == {}
 
 
