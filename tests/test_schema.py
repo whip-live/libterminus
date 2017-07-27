@@ -31,6 +31,9 @@ def test_schema_with_valid_data(encoded_jwt):
     """
     data = {
         'id': '01a61386-53ae-43bd-8586-d09acf88b391',
+        'user_id': '57a1cffe-6652-4804-b655-e9ea40fe65e6',
+        'activity_id': '8fd923ef-fc12-4a8a-9bae-3fe5329135c8',
+        'device_id': 'cd80ac71-5fe8-472e-90b1-23c2a4491c98',
         'started': datetime.datetime.now().isoformat(),
         'ended': datetime.datetime.now().isoformat(),
         'typology': 'moto',
@@ -73,6 +76,9 @@ def test_schema_with_invalid_jwt():
     """
     data = {
         'id': '01a61386-53ae-43bd-8586-d09acf88b391',
+        'user_id': '57a1cffe-6652-4804-b655-e9ea40fe65e6',
+        'activity_id': '8fd923ef-fc12-4a8a-9bae-3fe5329135c8',
+        'device_id': 'cd80ac71-5fe8-472e-90b1-23c2a4491c98',
         'started': datetime.datetime.now().isoformat(),
         'ended': datetime.datetime.now().isoformat(),
         'typology': 'moto',
