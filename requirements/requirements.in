@@ -1,6 +1,7 @@
 # core
 marshmallow
 pyjwt
+python-logstash
 
 # test
 coverage
