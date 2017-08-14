@@ -225,9 +225,9 @@ def test_schema_without_path(encoded_jwt):
     assert result.errors == {'path': {'coordinates': ['Missing data for required field.']}}
 
 
-def test_match_recording_schema():
+def test_match_segment_schema():
     """
-    Test the MatchRecordingSchema
+    Test the MatchSegmentSchema
     """
     data = {
         'segment_id': {
@@ -252,13 +252,15 @@ def test_match_recording_schema():
     assert result.errors == {}
 
 
-def test_match_recording_schema_without_some_fields(encoded_jwt):
+def test_match_recording_schema(encoded_jwt):
     """
     Test the MatchRecordingSchema
     """
     data = {
         'jwt': encoded_jwt,
         'id': '653a4136-e378-4790-809a-01cffe30e3ed',
+        'user_id': '57a1cffe-6652-4804-b655-e9ea40fe65e6',
+        'activity_id': '8fd923ef-fc12-4a8a-9bae-3fe5329135c8',
         'bbox': (0, 0, 1, 1),
         'path': {
             'coordinates': [
@@ -277,7 +279,33 @@ def test_match_recording_schema_without_some_fields(encoded_jwt):
     assert result.errors == {}
 
 
-def test_match_segment_schema():
+def test_match_recording_schema_failed(encoded_jwt):
+    """
+    Test the MatchRecordingSchema without the user_id
+    """
+    data = {
+        'jwt': encoded_jwt,
+        'id': '653a4136-e378-4790-809a-01cffe30e3ed',
+        'activity_id': '8fd923ef-fc12-4a8a-9bae-3fe5329135c8',
+        'bbox': (0, 0, 1, 1),
+        'path': {
+            'coordinates': [
+                [0.00001, 0.00001],
+                [0.00002, 0.00002],
+                [0.00003, 0.00003]
+            ]
+        },
+        'points': [
+            {'position': 'POINT(0.0002 0.0002)'},
+            {'position': 'POINT(0.0003 0.0003)'},
+            {'position': 'POINT(0.0004 0.0004)'},
+        ]
+    }
+    result = MatchRecordingSchema().load(data)
+    assert result.errors == {'user_id': ['Missing data for required field.']}
+
+
+def test_match_index_schema():
     data = {'segment_id': [(0, 2)]}
     result = MatchIndexSchema().load(data)
     assert result.errors == {}

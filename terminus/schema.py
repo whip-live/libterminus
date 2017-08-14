@@ -54,19 +54,27 @@ class RecordingSchema(Schema):
     path = fields.Nested(PathSchema, required=True)
 
 
+class MatchRecordingSchema(Schema):
+    """
+    recording part of the expected message in `recordings_matches`.
+
+    `recording_matches` is a tuple composed by 3 elements: recording,
+    matching_segments, matching_ids. This is the first part
+    """
+    id = fields.UUID(required=True)
+    user_id = fields.UUID(required=True)
+    activity_id = fields.UUID(required=True)
+    jwt = fields.Field(required=True, validate=validate_jwt)
+    bbox = fields.List(fields.Decimal())
+    path = fields.Nested(PathSchema)
+    points = fields.List(fields.Dict())
+
+
 class SectorSchema(Schema):
     name = fields.String()
     id = fields.UUID()
     start_index = fields.Integer()
     end_index = fields.Integer()
-
-
-class MatchRecordingSchema(Schema):
-    id = fields.UUID(required=True)
-    jwt = fields.Field(required=True, validate=validate_jwt)
-    bbox = fields.List(fields.Decimal())
-    path = fields.Nested(PathSchema)
-    points = fields.List(fields.Dict())
 
 
 class MatchSchema(Schema):
@@ -77,8 +85,20 @@ class MatchSchema(Schema):
 
 
 class MatchingSegmentSchema(Schema):
+    """
+    matched_segment part of the expected message in `recordings_matches`
+
+    `recording_matches` is a tuple composed by 3 elements: recording,
+    matching_segments, matching_ids. This is the second part
+    """
     segment_id = fields.Nested(MatchSchema)
 
 
 class MatchIndexSchema(Schema):
+    """
+    matching_ids part of the expected message in `recording_matches`
+
+    `recording_matches` is a tuple composed by 3 elements: recording,
+    matching_segments, matching_ids. This is the third part
+    """
     segment_id = fields.List(fields.Field())
