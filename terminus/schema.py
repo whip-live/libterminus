@@ -34,7 +34,14 @@ class PointSchema(Schema):
     pdop = fields.Float()
 
 
+class PathSchema(Schema):
+    coordinates = fields.List(fields.List(fields.Decimal), required=True)
+
+
 class RecordingSchema(Schema):
+    """
+    Data structure expected in `path_proposal` (sutt, bliss, isaac)
+    """
     jwt = fields.Field(required=True, validate=validate_jwt)
     typology = fields.String(required=True, validate=validate.OneOf(['moto', 'bike']))
     id = fields.UUID(required=True)
@@ -44,6 +51,7 @@ class RecordingSchema(Schema):
     started = fields.DateTime(required=True)
     ended = fields.DateTime(required=True)
     points = fields.Nested(PointSchema, many=True)
+    path = fields.Nested(PathSchema, required=True)
 
 
 class SectorSchema(Schema):
@@ -57,14 +65,14 @@ class MatchRecordingSchema(Schema):
     id = fields.UUID(required=True)
     jwt = fields.Field(required=True, validate=validate_jwt)
     bbox = fields.List(fields.Decimal())
-    path = fields.Dict()
+    path = fields.Nested(PathSchema)
     points = fields.List(fields.Dict())
 
 
 class MatchSchema(Schema):
     indexes = fields.List(fields.Field(), required=True)
     bbox = fields.List(fields.Integer(), required=True)
-    path = fields.Dict(required=True)
+    path = fields.Nested(PathSchema, required=True)
     sectors = fields.Nested(SectorSchema, many=True)
 
 

@@ -27,7 +27,7 @@ def test_device_data_schema(encoded_jwt):
 
 def test_schema_with_valid_data(encoded_jwt):
     """
-    Test recording schema with invalid JWT
+    Test recording schema
     """
     data = {
         'id': '01a61386-53ae-43bd-8586-d09acf88b391',
@@ -38,6 +38,12 @@ def test_schema_with_valid_data(encoded_jwt):
         'ended': datetime.datetime.now().isoformat(),
         'typology': 'moto',
         'jwt': encoded_jwt,
+        'path': {
+            'coordinates': [
+                [0.00001, 0.00001],
+                [0.00002, 0.00002]
+            ]
+        },
         'points': [
             {
                 'sequence_id': 1,
@@ -53,7 +59,7 @@ def test_schema_with_valid_data(encoded_jwt):
                 'pdop': 7,
             },
             {
-                'sequence_id': 1,
+                'sequence_id': 2,
                 'ele': 12,
                 'time': datetime.datetime.now().isoformat(),
                 'course': 30,
@@ -72,7 +78,7 @@ def test_schema_with_valid_data(encoded_jwt):
 
 def test_schema_with_invalid_jwt():
     """
-    Test recording schema
+    Test recording schema with invalid JWT
     """
     data = {
         'id': '01a61386-53ae-43bd-8586-d09acf88b391',
@@ -83,6 +89,12 @@ def test_schema_with_invalid_jwt():
         'ended': datetime.datetime.now().isoformat(),
         'typology': 'moto',
         'jwt': 'aaa.bbb.ccc',
+        'path': {
+            'coordinates': [
+                [0.00001, 0.00001],
+                [0.00002, 0.00002]
+            ]
+        },
         'points': [
             {
                 'sequence_id': 1,
@@ -98,7 +110,7 @@ def test_schema_with_invalid_jwt():
                 'pdop': 7,
             },
             {
-                'sequence_id': 1,
+                'sequence_id': 2,
                 'ele': 12,
                 'time': datetime.datetime.now().isoformat(),
                 'course': 30,
@@ -129,6 +141,12 @@ def test_schema_with_invalid_typology(encoded_jwt):
         'ended': datetime.datetime.now().isoformat(),
         'typology': 'foo',
         'jwt': encoded_jwt,
+        'path': {
+            'coordinates': [
+                [0.00001, 0.00001],
+                [0.00002, 0.00002]
+            ]
+        },
         'points': [
             {
                 'sequence_id': 1,
@@ -144,7 +162,7 @@ def test_schema_with_invalid_typology(encoded_jwt):
                 'pdop': 7,
             },
             {
-                'sequence_id': 1,
+                'sequence_id': 2,
                 'ele': 12,
                 'time': datetime.datetime.now().isoformat(),
                 'course': 30,
@@ -159,6 +177,52 @@ def test_schema_with_invalid_typology(encoded_jwt):
     }
     result = RecordingSchema().load(data)
     assert result.errors == {'typology': ['Not a valid choice.']}
+
+
+def test_schema_without_path(encoded_jwt):
+    """
+    Test recording schema without path
+    """
+    data = {
+        'id': '01a61386-53ae-43bd-8586-d09acf88b391',
+        'device_id': '5decc93d-ea32-41c4-9bf8-82e1d74c772f',
+        'activity_id': '0b119ed7-7333-46a0-ada1-c469a610ddd0',
+        'user_id': 'efbbb33c-f143-4f2d-a2f4-9d5d41df7d85',
+        'recording_id': 'd856a420-a04f-4328-b22e-d8f7bb12904a',
+        'started': datetime.datetime.now().isoformat(),
+        'ended': datetime.datetime.now().isoformat(),
+        'typology': 'moto',
+        'jwt': encoded_jwt,
+        'points': [
+            {
+                'sequence_id': 1,
+                'ele': 12,
+                'time': datetime.datetime.now().isoformat(),
+                'course': 30,
+                'speed': 90,
+                'position': [(0, 1), (0, 2)],
+                'geoidheight': 323,
+                'fix': 1,
+                'sat': 5,
+                'hdop': 8,
+                'pdop': 7,
+            },
+            {
+                'sequence_id': 2,
+                'ele': 12,
+                'time': datetime.datetime.now().isoformat(),
+                'course': 30,
+                'speed': 90,
+                'position': [(0, 3), (0, 4)],
+                'geoidheight': 323,
+                'fix': 1,
+                'sat': 5,
+                'hdop': 8,
+                'pdop': 7,
+            }]
+    }
+    result = RecordingSchema().load(data)
+    assert result.errors == {'path': {'coordinates': ['Missing data for required field.']}}
 
 
 def test_match_recording_schema():
