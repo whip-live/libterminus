@@ -40,7 +40,8 @@ class PathSchema(Schema):
 
 class RecordingSchema(Schema):
     """
-    Data structure expected in `path_proposal` (sutt, bliss, isaac)
+    Data structure expected in `recordings` (mallow, sutt) and
+    `path_proposal` (sutt, bliss, isaac)
     """
     jwt = fields.Field(required=True, validate=validate_jwt)
     typology = fields.String(required=True, validate=validate.OneOf(['moto', 'bike']))
