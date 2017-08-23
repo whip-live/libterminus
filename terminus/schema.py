@@ -40,8 +40,7 @@ class PathSchema(Schema):
 
 class RecordingSchema(Schema):
     """
-    Data structure expected in `recordings` (mallow, sutt) and
-    `path_proposal` (sutt, bliss, isaac)
+    Data structure expected in `recordings` (mallow, sutt)
     """
     jwt = fields.Field(required=True, validate=validate_jwt)
     typology = fields.String(required=True, validate=validate.OneOf(['moto', 'bike']))
@@ -52,7 +51,14 @@ class RecordingSchema(Schema):
     started = fields.DateTime(required=True)
     ended = fields.DateTime(required=True)
     points = fields.Nested(PointSchema, many=True)
-    path = fields.Nested(PathSchema)
+
+
+class PathProposalSchema(RecordingSchema):
+    """
+    Data structure expected in `path_proposal` (sutt, bliss, isaac)
+    Same as RecordingSchema, with 'path' field added
+    """
+    path = fields.Nested(PathSchema, required=True)
 
 
 class MatchRecordingSchema(Schema):
