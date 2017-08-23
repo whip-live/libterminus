@@ -3,6 +3,7 @@ import datetime
 from terminus.schema import (
     DeviceDataSchema,
     RecordingSchema,
+    PathProposalSchema,
     MatchRecordingSchema,
     MatchingSegmentSchema,
     MatchIndexSchema,
@@ -181,7 +182,7 @@ def test_schema_with_invalid_typology(encoded_jwt):
 
 def test_schema_without_path(encoded_jwt):
     """
-    Test recording schema without path
+    Test path proposal schema without path
     """
     data = {
         'id': '01a61386-53ae-43bd-8586-d09acf88b391',
@@ -221,7 +222,7 @@ def test_schema_without_path(encoded_jwt):
                 'pdop': 7,
             }]
     }
-    result = RecordingSchema().load(data)
+    result = PathProposalSchema().load(data)
     assert result.errors == {'path': {'coordinates': ['Missing data for required field.']}}
 
 
