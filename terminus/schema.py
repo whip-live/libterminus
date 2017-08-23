@@ -52,7 +52,7 @@ class RecordingSchema(Schema):
     started = fields.DateTime(required=True)
     ended = fields.DateTime(required=True)
     points = fields.Nested(PointSchema, many=True)
-    path = fields.Nested(PathSchema, required=True)
+    path = fields.Nested(PathSchema)
 
 
 class MatchRecordingSchema(Schema):
