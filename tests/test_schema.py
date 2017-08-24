@@ -1,4 +1,5 @@
 import datetime
+import uuid
 
 from terminus.schema import (
     DeviceDataSchema,
@@ -7,6 +8,8 @@ from terminus.schema import (
     MatchRecordingSchema,
     MatchingSegmentSchema,
     MatchIndexSchema,
+    SegmentSchema,
+    RecordingsToMatchSchema
 )
 
 
@@ -309,4 +312,83 @@ def test_match_recording_schema_failed(encoded_jwt):
 def test_match_index_schema():
     data = {'segment_id': [(0, 2)]}
     result = MatchIndexSchema().load(data)
+    assert result.errors == {}
+
+
+def test_segment_schema():
+    """
+    Test segment schema work sas expected
+    """
+    data = {
+        'id': uuid.uuid4(),
+        'name': 'fake name',
+        'path': {'coordinates': [[0, 0], [1, 1]]},
+        'public': True,
+        'track_type': 'sand',
+        'user_id': uuid.uuid4()
+    }
+    result = SegmentSchema().load(data)
+    assert result.errors == {}
+
+
+def test_recordings_to_match_schema_fails_if_no_data():
+    """
+    Test RecordingsToMatchSchema fails if no recordings or segments
+    """
+    data = {
+        'recordings': [],
+        'segments': []
+    }
+    result = RecordingsToMatchSchema().load(data)
+    assert result.errors == {
+        'recordings': ['At least one recording needed'],
+        'segments': ['At least one segment needed']
+    }
+
+
+def test_recordings_to_match_schema_works(encoded_jwt):
+    """
+    Test RecordingsToMatchSchema works with correct data
+    """
+    recording = {
+        'id': '01a61386-53ae-43bd-8586-d09acf88b391',
+        'user_id': '57a1cffe-6652-4804-b655-e9ea40fe65e6',
+        'activity_id': '8fd923ef-fc12-4a8a-9bae-3fe5329135c8',
+        'device_id': 'cd80ac71-5fe8-472e-90b1-23c2a4491c98',
+        'started': datetime.datetime.now().isoformat(),
+        'ended': datetime.datetime.now().isoformat(),
+        'typology': 'moto',
+        'jwt': encoded_jwt,
+        'path': {'coordinates': [[1, 1], [2, 2]]},
+        'points': [
+            {
+                'sequence_id': 1, 'ele': 12,
+                'time': datetime.datetime.now().isoformat(),
+                'course': 30, 'speed': 90,
+                'position': [(0, 1), (0, 2)], 'geoidheight': 323,
+                'fix': 1, 'sat': 5, 'hdop': 8, 'pdop': 7,
+            },
+            {
+                'sequence_id': 2, 'ele': 12,
+                'time': datetime.datetime.now().isoformat(),
+                'course': 30, 'speed': 90, 'position': [(0, 3), (0, 4)],
+                'geoidheight': 323, 'fix': 1, 'sat': 5, 'hdop': 8, 'pdop': 7,
+            }
+        ]
+    }
+
+    segment = {
+        'id': '01a61386-53ae-43bd-8586-d09acf88b391',
+        'user_id': '57a1cffe-6652-4804-b655-e9ea40fe65e6',
+        'name': 'fake',
+        'path': {'coordinates': [[1, 1], [2, 2]]},
+        'public': True,
+        'track_type': 'sand'
+    }
+
+    data = {
+        'recordings': [recording],
+        'segments': [segment]
+    }
+    result = RecordingsToMatchSchema().load(data)
     assert result.errors == {}

@@ -53,6 +53,30 @@ class RecordingSchema(Schema):
     points = fields.Nested(PointSchema, many=True)
 
 
+class SegmentSchema(Schema):
+    """
+    Data structure for a segment
+    """
+    id = fields.UUID(required=True)
+    name = fields.String(required=True)
+    public = fields.Bool(required=True)
+    user_id = fields.UUID(required=True)
+    path = fields.Nested(PathSchema, required=True)
+    track_type = fields.String(required=True, validate=validate.OneOf(['dirt', 'rock', 'sand']))
+
+
+class RecordingsToMatchSchema(Schema):
+    """
+    Data structure for the RecordingsToMatchSchema
+    """
+    recordings = fields.Nested(
+        RecordingSchema, many=True, required=True,
+        validate=validate.Length(min=1, error='At least one recording needed'))
+    segments = fields.Nested(
+        SegmentSchema, many=True, required=True,
+        validate=validate.Length(min=1, error='At least one segment needed'))
+
+
 class PathProposalSchema(RecordingSchema):
     """
     Data structure expected in `path_proposal` (sutt, bliss, isaac)
