@@ -53,6 +53,18 @@ class RecordingSchema(Schema):
     points = fields.Nested(PointSchema, many=True)
 
 
+class SerializedRecordingSchema(Schema):
+    """
+    Data structure expected in `recordings` (bliss)
+    """
+    typology = fields.String(required=True, validate=validate.OneOf(['moto', 'bike']))
+    id = fields.UUID(required=True)
+    device_id = fields.UUID(required=True)
+    started = fields.DateTime(required=True)
+    ended = fields.DateTime(required=True)
+    points = fields.Nested(PointSchema, many=True)
+
+
 class SegmentSchema(Schema):
     """
     Data structure for a segment
@@ -71,7 +83,7 @@ class RecordingsToMatchSchema(Schema):
     Data structure for the RecordingsToMatchSchema
     """
     recordings = fields.Nested(
-        RecordingSchema, many=True, required=True,
+        SerializedRecordingSchema, many=True, required=True,
         validate=validate.Length(min=1, error='At least one recording needed'))
     segments = fields.Nested(
         SegmentSchema, many=True, required=True,
