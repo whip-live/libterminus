@@ -60,7 +60,7 @@ class SegmentSchema(Schema):
     id = fields.UUID(required=True)
     name = fields.String(required=True)
     public = fields.Bool(required=True)
-    user_id = fields.UUID(required=True)
+    user = fields.UUID(required=True)
     path = fields.Nested(PathSchema, required=True)
     sectors = fields.Nested('SectorSchema', many=True, required=True)
     track_type = fields.String(required=True, validate=validate.OneOf(['dirt', 'rock', 'sand']))
