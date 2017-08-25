@@ -325,7 +325,7 @@ def test_segment_schema():
         'path': {'coordinates': [[0, 0], [1, 1]]},
         'public': True,
         'track_type': 'sand',
-        'user_id': uuid.uuid4(),
+        'user': uuid.uuid4(),
         'sectors': [],
     }
     result = SegmentSchema().load(data)
@@ -380,7 +380,7 @@ def test_recordings_to_match_schema_works(encoded_jwt):
 
     segment = {
         'id': '01a61386-53ae-43bd-8586-d09acf88b391',
-        'user_id': '57a1cffe-6652-4804-b655-e9ea40fe65e6',
+        'user': '57a1cffe-6652-4804-b655-e9ea40fe65e6',
         'name': 'fake',
         'path': {'coordinates': [[1, 1], [2, 2]]},
         'public': True,
