@@ -25,6 +25,24 @@ def test_device_data_schema(encoded_jwt):
         'user_id': '6fb46cfd-bb6e-4ff3-9b16-bbfbd2a45164',
         'activity_id': '82051d4a-1616-4016-9560-cd2a1755a8ea',
         'content_format': 'livex-1',
+        'activity_name': 'Test Activity'
+    }
+    result = DeviceDataSchema().load(data)
+    assert result.errors == {}
+
+
+def test_device_data_schema_without_activity_name(encoded_jwt):
+    """
+    Test the device_data schema without activity name
+    """
+    data = {
+        'jwt': encoded_jwt,
+        'typology': 'bike',
+        'device_id': '8dc51b75-03d1-4140-9768-10a3586882e9',
+        'recording_id': 'fd3fe49e-2c5a-4c24-a317-18c057c8c036',
+        'user_id': '6fb46cfd-bb6e-4ff3-9b16-bbfbd2a45164',
+        'content_format': 'livex-1',
+        'activity_id': '82051d4a-1616-4016-9560-cd2a1755a8ea',
     }
     result = DeviceDataSchema().load(data)
     assert result.errors == {}

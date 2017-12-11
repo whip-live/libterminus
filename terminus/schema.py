@@ -18,6 +18,7 @@ class DeviceDataSchema(Schema):
     user_id = fields.UUID(required=True)
     activity_id = fields.UUID(required=True)
     content_format = fields.String(required=True, validate=validate.OneOf(['livex-1', 'app-1']))
+    activity_name = fields.String()
 
 
 class PointSchema(Schema):
