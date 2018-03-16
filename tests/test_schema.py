@@ -417,6 +417,20 @@ def test_area_schema():
     assert result.errors == {}
 
 
+def test_area_schema_fails_missing_mandatory_fields():
+    """
+    Test empty Area Schema
+    """
+    result = AreaSchema().load({})
+    assert result.errors == {
+        'id': ['Missing data for required field.'],
+        'title': ['Missing data for required field.'],
+        'private': ['Missing data for required field.'],
+        'polygon': ['Missing data for required field.'],
+        'user_id': ['Missing data for required field.']
+    }
+
+
 def test_areas_to_match_schema_fail_empty_data(encoded_jwt):
     """
     Test that AreaToMatch Schema fails with empty data
