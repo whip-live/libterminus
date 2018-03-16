@@ -2,6 +2,8 @@ import datetime
 import uuid
 
 from terminus.schema import (
+    AreaSchema,
+    AreasToMatch,
     DeviceDataSchema,
     RecordingSchema,
     PathProposalSchema,
@@ -394,4 +396,87 @@ def test_recordings_to_match_schema_works(encoded_jwt):
         'segments': [segment]
     }
     result = RecordingsToMatchSchema().load(data)
+    assert result.errors == {}
+
+
+def test_area_schema():
+    """
+    Test Area Schema
+    """
+    area = {
+        'id': 'b81930ee-86a7-4737-9c8e-eab65820ea0d',
+        'user_id': '2eede4f3-10f6-4899-93f8-343b4b0a9ade',
+        'title': 'Test Area',
+        'private': False,
+        'polygon': {
+            'coordinates': [[[0.0, 0.0], [0.0, 50.0], [50.0, 50.0], [50.0, 0.0], [0.0, 0.0]]]
+        },
+        'tags': ['foo', 'bar', 'foobar']
+    }
+    result = AreaSchema().load(area)
+    assert result.errors == {}
+
+
+def test_areas_to_match_schema_fail_empty_data(encoded_jwt):
+    """
+    Test that AreaToMatch Schema fails with empty data
+    """
+    data = {
+        'areas': [],
+        'recordings': []
+    }
+    result = AreasToMatch().load(data)
+    assert result.errors == {
+        'areas': ['At least one area needed'],
+        'recordings': ['At least one recording needed']
+    }
+
+
+def test_areas_to_match_schema(encoded_jwt):
+    """
+    Test AreasToMatchSchema
+    """
+    area = {
+        'id': 'b81930ee-86a7-4737-9c8e-eab65820ea0d',
+        'user_id': '2eede4f3-10f6-4899-93f8-343b4b0a9ade',
+        'title': 'Test Area',
+        'private': False,
+        'polygon': {
+            'coordinates': [[[0.0, 0.0], [0.0, 50.0], [50.0, 50.0], [50.0, 0.0], [0.0, 0.0]]]
+        },
+        'tags': ['foo', 'bar', 'foobar']
+    }
+
+    recording = {
+        'id': '01a61386-53ae-43bd-8586-d09acf88b391',
+        'user_id': '57a1cffe-6652-4804-b655-e9ea40fe65e6',
+        'activity_id': '8fd923ef-fc12-4a8a-9bae-3fe5329135c8',
+        'device_id': 'cd80ac71-5fe8-472e-90b1-23c2a4491c98',
+        'started': datetime.datetime.now().isoformat(),
+        'ended': datetime.datetime.now().isoformat(),
+        'typology': 'moto',
+        'jwt': encoded_jwt,
+        'path': {'coordinates': [[1, 1], [2, 2]]},
+        'points': [
+            {
+                'sequence_id': 1, 'ele': 12,
+                'time': datetime.datetime.now().isoformat(),
+                'course': 30, 'speed': 90,
+                'position': [(0, 1), (0, 2)], 'geoidheight': 323,
+                'fix': 1, 'sat': 5, 'hdop': 8, 'pdop': 7,
+            },
+            {
+                'sequence_id': 2, 'ele': 12,
+                'time': datetime.datetime.now().isoformat(),
+                'course': 30, 'speed': 90, 'position': [(0, 3), (0, 4)],
+                'geoidheight': 323, 'fix': 1, 'sat': 5, 'hdop': 8, 'pdop': 7,
+            }
+        ]
+    }
+
+    data = {
+        'areas': [area],
+        'recordings': [recording]
+    }
+    result = AreasToMatch().load(data)
     assert result.errors == {}

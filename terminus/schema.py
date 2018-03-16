@@ -10,6 +10,21 @@ def validate_jwt(value):
         raise ValidationError('Invalid JWT')
 
 
+class PolygonSchema(Schema):
+    coordinates = fields.List(
+        fields.List(fields.List(fields.Decimal), required=True)
+    )
+
+
+class AreaSchema(Schema):
+    id = fields.UUID(required=True)
+    title = fields.String(required=True)
+    private = fields.Boolean(required=True)
+    polygon = fields.Nested(PolygonSchema, required=True)
+    user_id = fields.UUID(required=True)
+    tags = fields.List(fields.String())
+
+
 class DeviceDataSchema(Schema):
     jwt = fields.Field(required=True, validate=validate_jwt)
     typology = fields.String(required=True, validate=validate.OneOf(['moto', 'bike']))
@@ -52,6 +67,17 @@ class RecordingSchema(Schema):
     started = fields.DateTime(required=True)
     ended = fields.DateTime(required=True)
     points = fields.Nested(PointSchema, many=True)
+
+
+class AreasToMatch(Schema):
+    areas = fields.Nested(
+        AreaSchema, many=True, required=True,
+        validate=validate.Length(min=1, error='At least one area needed')
+    )
+    recordings = fields.Nested(
+        RecordingSchema, many=True, required=True,
+        validate=validate.Length(min=1, error='At least one recording needed')
+    )
 
 
 class SerializedRecordingSchema(Schema):
