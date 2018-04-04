@@ -92,4 +92,4 @@ class JSONDatagramHandler(DatagramHandler):
         self.formatter = JSONFormatter(custom_format, service=service)
 
     def makePickle(self, record):
-        return self.formatter.format(record).encode()
+        return self.formatter.format(record).encode() + b'\n'
