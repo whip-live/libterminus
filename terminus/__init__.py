@@ -1,4 +1,4 @@
-from .adapter import RecordingAdapter # noqa
+from .logutils import RecordingAdapter # noqa
 from .pipeline import Pipeline # noqa
 
 
@@ -13,7 +13,7 @@ LOGGING_LEVELS = list(logging._levelToName.values())
 
 
 def setup_logging(service_name, service_level='DEBUG', kafka_level='DEBUG',
-                  logstash_host='localhost', logstash_port='9300'):
+                  ddagent_host='localhost', ddagent_port=10518):
     """
     Setup the logger for a service named `service_name`.
     """
@@ -22,24 +22,21 @@ def setup_logging(service_name, service_level='DEBUG', kafka_level='DEBUG',
         'disable_existing_loggers': False,
         'root': {
             'level': 'ERROR',
-            'handlers': ['console', 'logstash'],
+            'handlers': ['console', 'ddagent'],
         },
         'loggers': {
             service_name: {
                 'level': service_level,
-                'handlers': ['console', 'logstash'],
+                'handlers': ['console', 'ddagent'],
                 'propagate': False,
             },
             'kafka': {
                 'level': kafka_level,
-                'handlers': ['console', 'logstash'],
+                'handlers': ['console', 'ddagent'],
                 'propagate': False,
             }
         },
         'formatters': {
-            'verbose': {
-                'format': '%(levelname)s %(asctime)s %(name)s [%(process)d] %(message)s'
-            },
             'simple': {
                 'format': '%(levelname)s %(name)s %(message)s'
             },
@@ -49,12 +46,11 @@ def setup_logging(service_name, service_level='DEBUG', kafka_level='DEBUG',
                 'class': 'logging.StreamHandler',
                 'formatter': 'simple',
             },
-            'logstash': {
-                'class': 'logstash.LogstashHandler',
-                'host': logstash_host,
-                'port': logstash_port,
-                'version': 1,
-                'message_type': service_name,
+            'ddagent': {
+                'class': 'terminus.logutils.JSONDatagramHandler',
+                'host': ddagent_host,
+                'port': ddagent_port,
+                'service': service_name,
             },
         },
     }
