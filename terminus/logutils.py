@@ -64,9 +64,8 @@ class JSONFormatter(logging.Formatter):
         }
         skip_list = ('args', 'exc_info', 'exc_text', 'stack_info', 'msg')
         for key, value in record.__dict__.items():
-            if key in skip_list:
-                continue
-            log.update({key: value})
+            if key not in skip_list:
+                log.update({key: value})
 
         if self.service:
             log.update({'service': self.service})
