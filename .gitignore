@@ -32,6 +32,7 @@ var/
 .coverage
 .coverage.*
 .cache
+.pytest_cache
 
 # Sphinx documentation
 docs/_build/

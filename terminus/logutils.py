@@ -1,8 +1,9 @@
 import jwt
-import json
 import logging
 
 from logging.handlers import DatagramHandler
+
+from pythonjsonlogger import jsonlogger
 
 
 def get_user_from_jwt(token):
@@ -41,36 +42,23 @@ class RecordingAdapter(logging.LoggerAdapter):
         return msg, {'extra': extra}
 
 
-class JSONFormatter(logging.Formatter):
+class JSONFormatter(jsonlogger.JsonFormatter):
     """
     Format the LogRecord as a JSON.
     We use datadog for logging, and the datadog agent can't decode the
     default python pickled LogRecord. It can't decode a packed json either.
     """
-
     service = None
 
-    def __init__(self, fmt=None, datefmt=None, style='%', service=None):
-        self.service = service
-        super().__init__(fmt, datefmt, style)
+    def __init__(self, *args, **kwargs):
+        self.service = kwargs.pop('service', 'unknown service')
 
-    def format(self, record):
-        """
-        This formatter fills the JSON with all the properies of the LogRecord,
-        extra fields included, except the ones in the `skip_list` array
-        """
-        log = {
-            'asctime': self.formatTime(record, self.datefmt),
-        }
-        skip_list = ('args', 'exc_info', 'exc_text', 'stack_info', 'msg')
-        for key, value in record.__dict__.items():
-            if key not in skip_list:
-                log.update({key: value})
+        super().__init__(*args, **kwargs)
 
-        if self.service:
-            log.update({'service': self.service})
-        # NOTE: The new line is needed otherwise the agent will not send the packet
-        return ("%s\n" % json.dumps(log)).encode()
+    def add_fields(self, log_record, record, message_dict):
+        super().add_fields(log_record, record, message_dict)
+
+        log_record['service'] = self.service
 
 
 class JSONDatagramHandler(DatagramHandler):
@@ -80,7 +68,28 @@ class JSONDatagramHandler(DatagramHandler):
 
     def __init__(self, host, port, service=None):
         super().__init__(host, port)
-        self.formatter = JSONFormatter(service=service)
+
+        supported_keys = [
+            'asctime',
+            'created',
+            'filename',
+            'funcName',
+            'levelname',
+            'levelno',
+            'lineno',
+            'module',
+            'msecs',
+            'message',
+            'name',
+            'pathname',
+            'process',
+            'processName',
+            'relativeCreated',
+            'thread',
+            'threadName'
+        ]
+        custom_format = ' '.join('%({0:s})'.format(k) for k in supported_keys)
+        self.formatter = JSONFormatter(custom_format, service=service)
 
     def makePickle(self, record):
-        return self.formatter.format(record)
+        return self.formatter.format(record).encode()
