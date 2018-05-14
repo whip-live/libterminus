@@ -32,7 +32,7 @@ class DeviceDataSchema(Schema):
     recording_id = fields.UUID(required=True)
     user_id = fields.UUID(required=True)
     activity_id = fields.UUID(required=True)
-    content_format = fields.String(required=True, validate=validate.OneOf(['livex-1', 'app-1']))
+    content_format = fields.String(required=True, validate=validate.OneOf(['livex-1', 'app-1', 'app-2']))
 
 
 class PointSchema(Schema):
