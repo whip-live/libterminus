@@ -313,8 +313,19 @@ def test_match_recording_schema_failed(encoded_jwt):
 
 
 def test_match_index_schema():
-    data = {'segment_id': [(0, 2)]}
-    result = MatchIndexSchema().load(data)
+    data = [
+        {
+            'segment_id': '653a4136-e378-4790-809a-01cffe30e3ed',
+            'matchings': [
+                {
+                    'matching_id': '8fd923ef-fc12-4a8a-9bae-3fe5329135c8',
+                    'start_index': 3,
+                    'end_index': 12,
+                }
+            ]
+        }
+    ]
+    result = MatchIndexSchema(many=True).load(data)
     assert result.errors == {}
 
 

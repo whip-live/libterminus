@@ -165,6 +165,13 @@ class MatchingSegmentSchema(Schema):
     segment_id = fields.Nested(MatchSchema)
 
 
+class SegmentMatchingsSchema(Schema):
+
+    matching_id = fields.UUID(required=True)
+    start_index = fields.Integer(required=True)
+    end_index = fields.Integer(required=True)
+
+
 class MatchIndexSchema(Schema):
     """
     matching_ids part of the expected message in `recording_matches`
@@ -172,4 +179,5 @@ class MatchIndexSchema(Schema):
     `recording_matches` is a tuple composed by 3 elements: recording,
     matching_segments, matching_ids. This is the third part
     """
-    segment_id = fields.List(fields.Field())
+    segment_id = fields.UUID(required=True)
+    matchings = fields.Nested(SegmentMatchingsSchema, many=True, required=True)
