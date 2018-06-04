@@ -12,8 +12,7 @@ from logging.config import dictConfig
 LOGGING_LEVELS = list(logging._levelToName.values())
 
 
-def setup_logging(service_name, service_level='DEBUG', kafka_level='DEBUG',
-                  ddagent_host='localhost', ddagent_port=10518):
+def setup_logging(service_name, service_level='DEBUG', ddagent_host='localhost', ddagent_port=10518):
     """
     Setup the logger for a service named `service_name`.
     """
@@ -30,11 +29,6 @@ def setup_logging(service_name, service_level='DEBUG', kafka_level='DEBUG',
                 'handlers': ['console', 'ddagent'],
                 'propagate': False,
             },
-            'kafka': {
-                'level': kafka_level,
-                'handlers': ['console', 'ddagent'],
-                'propagate': False,
-            }
         },
         'formatters': {
             'simple': {

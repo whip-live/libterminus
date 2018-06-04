@@ -102,8 +102,7 @@ def test_loghadler_send_JSON(fake_send, encoded_jwt):
     logger = logging.getLogger(__name__)
     logger = RecordingAdapter(logger, None)
 
-    setup_logging('test_terminus', service_level='DEBUG', kafka_level='DEBUG',
-                  ddagent_host='localhost', ddagent_port='10518')
+    setup_logging('test_terminus', service_level='DEBUG', ddagent_host='localhost', ddagent_port='10518')
     recording = {'id': '123456', 'jwt': encoded_jwt, 'device_id': '098'}
 
     logger.error('Test log message', recording=recording)
