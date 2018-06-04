@@ -49,8 +49,8 @@ def test_logging_adapter_jwt(encoded_jwt):
     logger = logging.getLogger()
     adapter = RecordingAdapter(logger, None)
     log_result = adapter.process('test msg', jwt)
-    exepcted = ('test msg', {'extra': {'jwt': 'user'}})
-    assert log_result == exepcted
+    expected = ('test msg', {'extra': {'jwt': 'user'}})
+    assert log_result == expected
 
 
 def test_logging_adapter_recording_id():
@@ -63,8 +63,8 @@ def test_logging_adapter_recording_id():
     logger = logging.getLogger()
     adapter = RecordingAdapter(logger, None)
     log_result = adapter.process('test msg', recording_id)
-    exepcted = ('test msg', {'extra': {'recording_id': 134}})
-    assert log_result == exepcted
+    expected = ('test msg', {'extra': {'recording_id': 134}})
+    assert log_result == expected
 
 
 def test_logging_adapter_device_id():
@@ -77,8 +77,8 @@ def test_logging_adapter_device_id():
     logger = logging.getLogger()
     adapter = RecordingAdapter(logger, None)
     log_result = adapter.process('test msg', device_id)
-    exepcted = ('test msg', {'extra': {'device_id': 1}})
-    assert log_result == exepcted
+    expected = ('test msg', {'extra': {'device_id': 1}})
+    assert log_result == expected
 
 
 def test_jwt_without_username():
@@ -93,8 +93,8 @@ def test_jwt_without_username():
     logger = logging.getLogger()
     adapter = RecordingAdapter(logger, None)
     log_result = adapter.process('test msg', jwt)
-    exepcted = ('test msg', {'extra': {'jwt': '123456'}})
-    assert log_result == exepcted
+    expected = ('test msg', {'extra': {'jwt': '123456'}})
+    assert log_result == expected
 
 
 @patch('terminus.logutils.JSONDatagramHandler.send')

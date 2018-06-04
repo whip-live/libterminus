@@ -1,5 +1,6 @@
 from .logutils import RecordingAdapter # noqa
 from .pipeline import Pipeline # noqa
+from .pubsub_utils import create_topic, create_subscription # noqa
 
 
 import logging
