@@ -50,7 +50,7 @@ class PointSchema(Schema):
     pdop = fields.Float()
 
 
-class PathSchema(Schema):
+class LineStringSchema(Schema):
     coordinates = fields.List(fields.List(fields.Decimal), required=True)
 
 
@@ -100,7 +100,9 @@ class SegmentSchema(Schema):
     name = fields.String(required=True)
     public = fields.Bool(required=True)
     user = fields.UUID(required=True)
-    path = fields.Nested(PathSchema, required=True)
+    path = fields.Nested(LineStringSchema, required=True)
+    start_line = fields.Nested(LineStringSchema, required=True)
+    end_line = fields.Nested(LineStringSchema, required=True)
     sectors = fields.Nested('SectorSchema', many=True, required=True)
     track_type = fields.String(required=True, validate=validate.OneOf(['dirt', 'rock', 'sand']))
 
@@ -122,7 +124,7 @@ class PathProposalSchema(RecordingSchema):
     Data structure expected in `path_proposal` (sutt, bliss, isaac)
     Same as RecordingSchema, with 'path' field added
     """
-    path = fields.Nested(PathSchema, required=True)
+    path = fields.Nested(LineStringSchema, required=True)
 
 
 class MatchRecordingSchema(Schema):
@@ -137,7 +139,7 @@ class MatchRecordingSchema(Schema):
     activity_id = fields.UUID(required=True)
     jwt = fields.Field(required=True, validate=validate_jwt)
     bbox = fields.List(fields.Decimal())
-    path = fields.Nested(PathSchema)
+    path = fields.Nested(LineStringSchema)
     points = fields.List(fields.Dict())
 
 
@@ -151,7 +153,7 @@ class SectorSchema(Schema):
 class MatchSchema(Schema):
     indexes = fields.List(fields.Field(), required=True)
     bbox = fields.List(fields.Integer(), required=True)
-    path = fields.Nested(PathSchema, required=True)
+    path = fields.Nested(LineStringSchema, required=True)
     sectors = fields.Nested(SectorSchema, many=True)
 
 

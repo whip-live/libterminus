@@ -337,6 +337,8 @@ def test_segment_schema():
         'id': uuid.uuid4(),
         'name': 'fake name',
         'path': {'coordinates': [[0, 0], [1, 1]]},
+        'start_line': {'coordinates': [[0, 0], [1, 1]]},
+        'end_line': {'coordinates': [[0, 0], [1, 1]]},
         'public': True,
         'track_type': 'sand',
         'user': uuid.uuid4(),
@@ -358,6 +360,41 @@ def test_recordings_to_match_schema_fails_if_no_data():
     assert result.errors == {
         'recordings': ['At least one recording needed'],
         'segments': ['At least one segment needed']
+    }
+
+
+def test_recordings_to_match_schema_fail_empty_data(encoded_jwt):
+    """
+    Test RecordingsToMatchSchema fails with empty recordings or segments
+    """
+    data = {
+        'recordings': [{}],
+        'segments': [{}]
+    }
+    result = RecordingsToMatchSchema().load(data)
+    assert result.errors == {
+        'recordings': {
+            0: {
+                'id': ['Missing data for required field.'],
+                'device_id': ['Missing data for required field.'],
+                'typology': ['Missing data for required field.'],
+                'started': ['Missing data for required field.'],
+                'ended': ['Missing data for required field.'],
+            }
+        },
+        'segments': {
+            0: {
+                'id': ['Missing data for required field.'],
+                'user': ['Missing data for required field.'],
+                'name': ['Missing data for required field.'],
+                'public': ['Missing data for required field.'],
+                'track_type': ['Missing data for required field.'],
+                'path': {'coordinates': ['Missing data for required field.']},
+                'start_line': {'coordinates': ['Missing data for required field.']},
+                'end_line': {'coordinates': ['Missing data for required field.']},
+                'sectors': ['Missing data for required field.'],
+            }
+        }
     }
 
 
@@ -397,6 +434,8 @@ def test_recordings_to_match_schema_works(encoded_jwt):
         'user': '57a1cffe-6652-4804-b655-e9ea40fe65e6',
         'name': 'fake',
         'path': {'coordinates': [[1, 1], [2, 2]]},
+        'start_line': {'coordinates': [[1, 1], [2, 2]]},
+        'end_line': {'coordinates': [[1, 1], [2, 2]]},
         'public': True,
         'track_type': 'sand',
         'sectors': [],
