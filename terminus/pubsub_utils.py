@@ -19,13 +19,13 @@ def create_topic(publisher, google_project_id, topic):
         topic = publisher.create_topic(topic_path)
         logger.info("Topic %s correclty created", topic)
     except exceptions.AlreadyExists:
-        logger.exception("Topic already exist")
+        logger.warning("Topic already exist")
     except exceptions.GoogleAPIError:
         logger.exception("Something went wrong while creating topic")
         raise
 
 
-def create_subscription(subscriber, google_project_id, topic, subscription):
+def create_subscription(subscriber, google_project_id, topic, subscription, **kwargs):
     """
     Create subscription where we are going to pull messages.
 
@@ -42,10 +42,12 @@ def create_subscription(subscriber, google_project_id, topic, subscription):
     topic_path = subscriber.topic_path(google_project_id, topic)
     subscription_path = subscriber.subscription_path(google_project_id, subscription)
     try:
-        subscription = subscriber.create_subscription(subscription_path, topic_path)
+        subscription = subscriber.create_subscription(
+            subscription_path, topic_path, **kwargs
+        )
         logger.info("Subscription %s correctly created", subscription)
     except exceptions.AlreadyExists:
-        logger.exception("Subscription already exist")
+        logger.warning("Subscription already exist")
     except exceptions.GoogleAPIError:
         logger.exception("Somethings went wrong while creating subscription")
         raise
