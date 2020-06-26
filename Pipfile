@@ -1,0 +1,18 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pytest = "*"
+pytest-cov = "*"
+flake8 = "*"
+
+[requires]
+python_version = "3.7"
+
+[packages]
+google-api-core = "~=1.8"
+marshmallow = "~=2.18"
+python-json-logger = "~=0.1"
+pyjwt = "~=1.7"
