@@ -1,0 +1,28 @@
+syntax = "proto3";
+package terminus.recording;
+
+import "terminus/proto/core.proto";
+
+message Recording {
+  string jwt = 1;
+  terminus.core.Typology typology = 2;
+  bytes id = 3;
+  bytes user_id = 4;
+  bytes activity_id = 5;
+  bytes device_id = 6;
+  int64 started = 7;
+  int64 ended = 8;
+
+  message Point {
+    uint64 sequence_id = 1;
+    double time = 2;
+    float speed = 3;
+    float position_lat = 4;
+    float position_lon = 5;
+    float ele = 6;
+    float pdop = 7;
+    float hdop = 8;  // used for autopause
+  }
+
+  repeated Point points = 9;
+}

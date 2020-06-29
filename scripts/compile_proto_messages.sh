@@ -19,6 +19,7 @@ DST_DIR="${__dir}/../"
 echo "Generate proto implementations:"
 $PROTOC -I=$SRC_DIR --python_out=$DST_DIR \
 	$SRC_DIR/terminus/proto/core.proto \
-	$SRC_DIR/terminus/proto/device_data.proto
+	$SRC_DIR/terminus/proto/device_data.proto \
+	$SRC_DIR/terminus/proto/recording.proto
 
 echo "Completed with success"
