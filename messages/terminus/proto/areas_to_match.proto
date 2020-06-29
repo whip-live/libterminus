@@ -1,0 +1,15 @@
+syntax = "proto3";
+package terminus.recording;
+
+import "terminus/proto/core.proto";
+import "terminus/proto/recording.proto";
+
+message AreasToMatch {
+  repeated Recording recordings = 1;  // previously defined in WKP1-6
+
+  message Area {
+    bytes id = 1;
+    terminus.core.GeoPath polygon = 2; // defined in WKP1-23
+  }
+  repeated Area areas = 2;
+}
