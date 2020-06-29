@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x1eterminus/proto/recording.proto\x12\x12terminus.recording\x1a\x19terminus/proto/core.proto\"\xee\x02\n\tRecording\x12\x0b\n\x03jwt\x18\x01 \x01(\t\x12)\n\x08typology\x18\x02 \x01(\x0e\x32\x17.terminus.core.Typology\x12\n\n\x02id\x18\x03 \x01(\x0c\x12\x0f\n\x07user_id\x18\x04 \x01(\x0c\x12\x13\n\x0b\x61\x63tivity_id\x18\x05 \x01(\x0c\x12\x11\n\tdevice_id\x18\x06 \x01(\x0c\x12\x0f\n\x07started\x18\x07 \x01(\x03\x12\r\n\x05\x65nded\x18\x08 \x01(\x03\x12\x33\n\x06points\x18\t \x03(\x0b\x32#.terminus.recording.Recording.Point\x1a\x8e\x01\n\x05Point\x12\x13\n\x0bsequence_id\x18\x01 \x01(\x04\x12\x0c\n\x04time\x18\x02 \x01(\x01\x12\r\n\x05speed\x18\x03 \x01(\x02\x12\x14\n\x0cposition_lat\x18\x04 \x01(\x02\x12\x14\n\x0cposition_lon\x18\x05 \x01(\x02\x12\x0b\n\x03\x65le\x18\x06 \x01(\x02\x12\x0c\n\x04pdop\x18\x07 \x01(\x02\x12\x0c\n\x04hdop\x18\x08 \x01(\x02\x62\x06proto3'
+  serialized_pb=b'\n\x1eterminus/proto/recording.proto\x12\x12terminus.recording\x1a\x19terminus/proto/core.proto\"\xd8\x02\n\tRecording\x12\x0b\n\x03jwt\x18\x01 \x01(\t\x12)\n\x08typology\x18\x02 \x01(\x0e\x32\x17.terminus.core.Typology\x12\n\n\x02id\x18\x03 \x01(\x0c\x12\x0f\n\x07user_id\x18\x04 \x01(\x0c\x12\x13\n\x0b\x61\x63tivity_id\x18\x05 \x01(\x0c\x12\x11\n\tdevice_id\x18\x06 \x01(\x0c\x12\x0f\n\x07started\x18\x07 \x01(\x03\x12\r\n\x05\x65nded\x18\x08 \x01(\x03\x12\x33\n\x06points\x18\t \x03(\x0b\x32#.terminus.recording.Recording.Point\x1ay\n\x05Point\x12\x0c\n\x04time\x18\x02 \x01(\x03\x12\r\n\x05speed\x18\x03 \x01(\x02\x12\x14\n\x0cposition_lat\x18\x04 \x01(\x02\x12\x14\n\x0cposition_lon\x18\x05 \x01(\x02\x12\x0b\n\x03\x65le\x18\x06 \x01(\x02\x12\x0c\n\x04pdop\x18\x07 \x01(\x02\x12\x0c\n\x04hdop\x18\x08 \x01(\x02\x62\x06proto3'
   ,
   dependencies=[terminus_dot_proto_dot_core__pb2.DESCRIPTOR,])
 
@@ -36,56 +36,49 @@ _RECORDING_POINT = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='sequence_id', full_name='terminus.recording.Recording.Point.sequence_id', index=0,
-      number=1, type=4, cpp_type=4, label=1,
+      name='time', full_name='terminus.recording.Recording.Point.time', index=0,
+      number=2, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='time', full_name='terminus.recording.Recording.Point.time', index=1,
-      number=2, type=1, cpp_type=5, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='speed', full_name='terminus.recording.Recording.Point.speed', index=2,
+      name='speed', full_name='terminus.recording.Recording.Point.speed', index=1,
       number=3, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='position_lat', full_name='terminus.recording.Recording.Point.position_lat', index=3,
+      name='position_lat', full_name='terminus.recording.Recording.Point.position_lat', index=2,
       number=4, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='position_lon', full_name='terminus.recording.Recording.Point.position_lon', index=4,
+      name='position_lon', full_name='terminus.recording.Recording.Point.position_lon', index=3,
       number=5, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='ele', full_name='terminus.recording.Recording.Point.ele', index=5,
+      name='ele', full_name='terminus.recording.Recording.Point.ele', index=4,
       number=6, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='pdop', full_name='terminus.recording.Recording.Point.pdop', index=6,
+      name='pdop', full_name='terminus.recording.Recording.Point.pdop', index=5,
       number=7, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='hdop', full_name='terminus.recording.Recording.Point.hdop', index=7,
+      name='hdop', full_name='terminus.recording.Recording.Point.hdop', index=6,
       number=8, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
@@ -103,8 +96,8 @@ _RECORDING_POINT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=306,
-  serialized_end=448,
+  serialized_start=305,
+  serialized_end=426,
 )
 
 _RECORDING = _descriptor.Descriptor(
@@ -191,7 +184,7 @@ _RECORDING = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=82,
-  serialized_end=448,
+  serialized_end=426,
 )
 
 _RECORDING_POINT.containing_type = _RECORDING

@@ -1,0 +1,16 @@
+syntax = "proto3";
+package terminus.recordings_to_match;
+
+import "terminus/proto/core.proto";
+import "terminus/proto/recording.proto";
+
+message RecordingsToMatch {
+  message Segment {
+    bytes id = 1;
+    repeated terminus.core.GeoPoint path = 2;
+    repeated terminus.core.GeoPoint start_line = 3;
+    repeated terminus.core.GeoPoint end_line = 4;
+  }
+  repeated terminus.recording.Recording recordings = 1;
+  repeated Segment segments = 2;
+}
