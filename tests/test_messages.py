@@ -3,10 +3,22 @@ import uuid
 from datetime import datetime, timezone, timedelta
 
 from terminus.proto import device_data_pb2
+from terminus.proto import areas_to_match_pb2
 from terminus.proto import recording_pb2
 from terminus.proto import recordings_matches_pb2
 from terminus.proto import recordings_to_match_pb2
 from terminus.proto import core_pb2
+
+
+def test_areas_to_match(recording_message):
+    areas_to_match = areas_to_match_pb2.AreasToMatch()
+    areas_to_match.recordings.append(recording_message)
+    area = areas_to_match_pb2.AreasToMatch.Area()
+    area.id = uuid.uuid4().bytes
+    area.polygon.lats.append(43.0000001)
+    area.polygon.lons.append(43.0000001)
+    areas_to_match.areas.append(area)
+    assert areas_to_match.ByteSize() == 641
 
 
 def test_recordings_matches(recording_message):

@@ -22,6 +22,7 @@ $PROTOC -I=$SRC_DIR --python_out=$DST_DIR \
 	$SRC_DIR/terminus/proto/device_data.proto \
 	$SRC_DIR/terminus/proto/recording.proto \
 	$SRC_DIR/terminus/proto/recordings_matches.proto \
+	$SRC_DIR/terminus/proto/areas_to_match.proto \
 	$SRC_DIR/terminus/proto/recordings_to_match.proto
 
 echo "Completed with success"
