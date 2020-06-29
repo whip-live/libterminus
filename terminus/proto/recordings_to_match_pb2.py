@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n(terminus/proto/recordings_to_match.proto\x12\x1cterminus.recordings_to_match\x1a\x19terminus/proto/core.proto\x1a\x1eterminus/proto/recording.proto\"\xa8\x02\n\x11RecordingsToMatch\x12\x31\n\nrecordings\x18\x01 \x03(\x0b\x32\x1d.terminus.recording.Recording\x12I\n\x08segments\x18\x02 \x03(\x0b\x32\x37.terminus.recordings_to_match.RecordingsToMatch.Segment\x1a\x94\x01\n\x07Segment\x12\n\n\x02id\x18\x01 \x01(\x0c\x12%\n\x04path\x18\x02 \x03(\x0b\x32\x17.terminus.core.GeoPoint\x12+\n\nstart_line\x18\x03 \x03(\x0b\x32\x17.terminus.core.GeoPoint\x12)\n\x08\x65nd_line\x18\x04 \x03(\x0b\x32\x17.terminus.core.GeoPointb\x06proto3'
+  serialized_pb=b'\n(terminus/proto/recordings_to_match.proto\x12\x1cterminus.recordings_to_match\x1a\x19terminus/proto/core.proto\x1a\x1eterminus/proto/recording.proto\"\xa5\x02\n\x11RecordingsToMatch\x12\x31\n\nrecordings\x18\x01 \x03(\x0b\x32\x1d.terminus.recording.Recording\x12I\n\x08segments\x18\x02 \x03(\x0b\x32\x37.terminus.recordings_to_match.RecordingsToMatch.Segment\x1a\x91\x01\n\x07Segment\x12\n\n\x02id\x18\x01 \x01(\x0c\x12$\n\x04path\x18\x02 \x01(\x0b\x32\x16.terminus.core.GeoPath\x12*\n\nstart_line\x18\x03 \x01(\x0b\x32\x16.terminus.core.GeoPath\x12(\n\x08\x65nd_line\x18\x04 \x01(\x0b\x32\x16.terminus.core.GeoPathb\x06proto3'
   ,
   dependencies=[terminus_dot_proto_dot_core__pb2.DESCRIPTOR,terminus_dot_proto_dot_recording__pb2.DESCRIPTOR,])
 
@@ -45,22 +45,22 @@ _RECORDINGSTOMATCH_SEGMENT = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='path', full_name='terminus.recordings_to_match.RecordingsToMatch.Segment.path', index=1,
-      number=2, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='start_line', full_name='terminus.recordings_to_match.RecordingsToMatch.Segment.start_line', index=2,
-      number=3, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='end_line', full_name='terminus.recordings_to_match.RecordingsToMatch.Segment.end_line', index=3,
-      number=4, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -77,7 +77,7 @@ _RECORDINGSTOMATCH_SEGMENT = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=282,
-  serialized_end=430,
+  serialized_end=427,
 )
 
 _RECORDINGSTOMATCH = _descriptor.Descriptor(
@@ -115,12 +115,12 @@ _RECORDINGSTOMATCH = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=134,
-  serialized_end=430,
+  serialized_end=427,
 )
 
-_RECORDINGSTOMATCH_SEGMENT.fields_by_name['path'].message_type = terminus_dot_proto_dot_core__pb2._GEOPOINT
-_RECORDINGSTOMATCH_SEGMENT.fields_by_name['start_line'].message_type = terminus_dot_proto_dot_core__pb2._GEOPOINT
-_RECORDINGSTOMATCH_SEGMENT.fields_by_name['end_line'].message_type = terminus_dot_proto_dot_core__pb2._GEOPOINT
+_RECORDINGSTOMATCH_SEGMENT.fields_by_name['path'].message_type = terminus_dot_proto_dot_core__pb2._GEOPATH
+_RECORDINGSTOMATCH_SEGMENT.fields_by_name['start_line'].message_type = terminus_dot_proto_dot_core__pb2._GEOPATH
+_RECORDINGSTOMATCH_SEGMENT.fields_by_name['end_line'].message_type = terminus_dot_proto_dot_core__pb2._GEOPATH
 _RECORDINGSTOMATCH_SEGMENT.containing_type = _RECORDINGSTOMATCH
 _RECORDINGSTOMATCH.fields_by_name['recordings'].message_type = terminus_dot_proto_dot_recording__pb2._RECORDING
 _RECORDINGSTOMATCH.fields_by_name['segments'].message_type = _RECORDINGSTOMATCH_SEGMENT

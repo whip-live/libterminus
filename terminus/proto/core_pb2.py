@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x19terminus/proto/core.proto\x12\rterminus.core\"$\n\x08GeoPoint\x12\x0b\n\x03lat\x18\x01 \x01(\x02\x12\x0b\n\x03lon\x18\x02 \x01(\x02*\x1e\n\x08Typology\x12\x08\n\x04MOTO\x10\x00\x12\x08\n\x04\x42IKE\x10\x01\x62\x06proto3'
+  serialized_pb=b'\n\x19terminus/proto/core.proto\x12\rterminus.core\"%\n\x07GeoPath\x12\x0c\n\x04lats\x18\x01 \x03(\x02\x12\x0c\n\x04lons\x18\x02 \x03(\x02*\x1e\n\x08Typology\x12\x08\n\x04MOTO\x10\x00\x12\x08\n\x04\x42IKE\x10\x01\x62\x06proto3'
 )
 
 _TYPOLOGY = _descriptor.EnumDescriptor(
@@ -43,8 +43,8 @@ _TYPOLOGY = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=82,
-  serialized_end=112,
+  serialized_start=83,
+  serialized_end=113,
 )
 _sym_db.RegisterEnumDescriptor(_TYPOLOGY)
 
@@ -54,25 +54,25 @@ BIKE = 1
 
 
 
-_GEOPOINT = _descriptor.Descriptor(
-  name='GeoPoint',
-  full_name='terminus.core.GeoPoint',
+_GEOPATH = _descriptor.Descriptor(
+  name='GeoPath',
+  full_name='terminus.core.GeoPath',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='lat', full_name='terminus.core.GeoPoint.lat', index=0,
-      number=1, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
+      name='lats', full_name='terminus.core.GeoPath.lats', index=0,
+      number=1, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='lon', full_name='terminus.core.GeoPoint.lon', index=1,
-      number=2, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
+      name='lons', full_name='terminus.core.GeoPath.lons', index=1,
+      number=2, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -89,19 +89,19 @@ _GEOPOINT = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=44,
-  serialized_end=80,
+  serialized_end=81,
 )
 
-DESCRIPTOR.message_types_by_name['GeoPoint'] = _GEOPOINT
+DESCRIPTOR.message_types_by_name['GeoPath'] = _GEOPATH
 DESCRIPTOR.enum_types_by_name['Typology'] = _TYPOLOGY
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
-GeoPoint = _reflection.GeneratedProtocolMessageType('GeoPoint', (_message.Message,), {
-  'DESCRIPTOR' : _GEOPOINT,
+GeoPath = _reflection.GeneratedProtocolMessageType('GeoPath', (_message.Message,), {
+  'DESCRIPTOR' : _GEOPATH,
   '__module__' : 'terminus.proto.core_pb2'
-  # @@protoc_insertion_point(class_scope:terminus.core.GeoPoint)
+  # @@protoc_insertion_point(class_scope:terminus.core.GeoPath)
   })
-_sym_db.RegisterMessage(GeoPoint)
+_sym_db.RegisterMessage(GeoPath)
 
 
 # @@protoc_insertion_point(module_scope)

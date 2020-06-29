@@ -7,7 +7,7 @@ enum Typology {
 }
 
 
-message GeoPoint {
-  float lat = 1;
-  float lon = 2;
+message GeoPath {
+  repeated float lats = 1;
+  repeated float lons = 2;
 }
