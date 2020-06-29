@@ -4,13 +4,36 @@ from datetime import datetime, timezone, timedelta
 
 from terminus.proto import device_data_pb2
 from terminus.proto import recording_pb2
+from terminus.proto import recordings_to_match_pb2
 from terminus.proto import core_pb2
 
 
-def test_recording_proto_message():
+def test_recordings_to_match_message(recording_message):
+    # Create RecordingsToMatch instance
+    recordings_to_match = recordings_to_match_pb2.RecordingsToMatch()
+    # Add recording from fixture
+    recordings_to_match.recordings.append(recording_message)
+    # Create a segment
+    segment = recordings_to_match_pb2.RecordingsToMatch.Segment()
+    segment.id = uuid.uuid4().bytes
+    segment.path.lats.append(42.0020202)
+    segment.path.lons.append(42.0020202)
+    segment.start_line.lats.append(42.0020202)
+    segment.start_line.lons.append(42.0020202)
+    segment.end_line.lats.append(42.0020202)
+    segment.end_line.lons.append(42.0020202)
 
+    # Add the segment
+    recordings_to_match.segments.append(segment)
+    # Test serialization works
+    recordings_to_match.SerializeToString()
+    # Assert size
+    assert recordings_to_match.ByteSize() == 669
+
+
+def test_recording_proto_message():
     # Calculate timestamp in milliseconds
-    now = datetime.now(timezone.utc)
+    now = datetime(2020, 1, 1, tzinfo=timezone.utc)
     epoch = datetime(1970, 1, 1, tzinfo=timezone.utc)
     # Start an hour ago, end now
     started = (now - epoch - timedelta(hours=1)) // timedelta(milliseconds=1)
@@ -33,7 +56,7 @@ def test_recording_proto_message():
     # Add some points
     for i in range(10):
         point = recording_pb2.Recording.Point()
-        point.time = started + (ended - started) / 10 * i
+        point.time = int(started + (ended - started) / 10 * i)
         point.speed = i * 0.1
         point.position_lat = i * 0.0000001
         point.position_lon = i * 0.0000001
@@ -41,7 +64,9 @@ def test_recording_proto_message():
         point.pdop = i
         point.hdop = i * 0.1
         recording.points.append(point)
-    assert recording.ByteSize() == 624
+    # Test serialization works
+    recording.SerializeToString()
+    assert recording.ByteSize() == 604
 
 
 def test_device_data_proto_message():

@@ -5,3 +5,9 @@ enum Typology {
   MOTO = 0;
   BIKE = 1;
 }
+
+
+message GeoPath {
+  repeated float lats = 1;
+  repeated float lons = 2;
+}
