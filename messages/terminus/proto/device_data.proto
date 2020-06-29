@@ -1,0 +1,23 @@
+syntax = "proto3";
+package terminus.device_data;
+
+import "terminus/proto/core.proto";
+
+message DeviceData {
+  bytes content = 1;
+  string jwt = 2;
+  bytes user_id = 3;
+  bytes activity_id = 4;
+  bytes device_id = 5;
+  bytes recording_id = 6;
+  terminus.core.Typology typology = 7;
+  DeviceDataFormat content_format = 8;
+}
+
+enum DeviceDataFormat {
+  LIVEX_1 = 0;
+  APP_1 = 1;
+  APP_2 = 2;
+  KTM_CSV_1 = 3;
+}
+

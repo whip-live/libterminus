@@ -1,0 +1,7 @@
+syntax = "proto3";
+package terminus.core;
+
+enum Typology {
+  MOTO = 0;
+  BIKE = 1;
+}

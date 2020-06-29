@@ -7,6 +7,7 @@ verify_ssl = true
 pytest = "*"
 pytest-cov = "*"
 flake8 = "*"
+python-language-server = {extras = ["mccabe", "pycodestyle", "pydocstyle", "pyflakes", "rope"], version = "*"}
 
 [requires]
 python_version = "3.7"
