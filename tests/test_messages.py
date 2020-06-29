@@ -33,7 +33,6 @@ def test_recording_proto_message():
     # Add some points
     for i in range(10):
         point = recording_pb2.Recording.Point()
-        point.sequence_id = i
         point.time = started + (ended - started) / 10 * i
         point.speed = i * 0.1
         point.position_lat = i * 0.0000001
@@ -42,7 +41,7 @@ def test_recording_proto_message():
         point.pdop = i
         point.hdop = i * 0.1
         recording.points.append(point)
-    assert recording.ByteSize() == 642
+    assert recording.ByteSize() == 624
 
 
 def test_device_data_proto_message():
