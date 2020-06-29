@@ -14,8 +14,8 @@ message Recording {
   int64 ended = 8;
 
   message Point {
-    uint64 sequence_id = 1;
-    double time = 2;
+    uint32 sequence_id = 1;
+    int64 time = 2;
     float speed = 3;
     float position_lat = 4;
     float position_lon = 5;
