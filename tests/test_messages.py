@@ -4,8 +4,39 @@ from datetime import datetime, timezone, timedelta
 
 from terminus.proto import device_data_pb2
 from terminus.proto import recording_pb2
+from terminus.proto import recordings_matches_pb2
 from terminus.proto import recordings_to_match_pb2
 from terminus.proto import core_pb2
+
+
+def test_recordings_matches(recording_message):
+    recordings_matches = recordings_matches_pb2.RecordingsMatches()
+    # Add recording first
+    recordings_matches.recording.CopyFrom(recording_message)
+
+    # Create matching_id
+    segment_id = uuid.uuid4()
+    recording_id = uuid.uuid4()
+
+    matching_id = recordings_matches_pb2.RecordingsMatches.MatchingId()
+    matching_id.segment_id = segment_id.bytes
+
+    matching = recordings_matches_pb2.RecordingsMatches.MatchingId.Matching()
+    matching.matching_id = recording_id.bytes
+    matching.start_index = 0
+    matching.end_index = 1
+
+    # Add matching to matching_id.matchings
+    matching_id.matchings.append(matching)
+
+    # Create matching segment struct
+    index = recordings_matches_pb2.RecordingsMatches.MatchingSegment.Index()
+    index.start = 0
+    index.end = 10
+    recordings_matches.matching_segments[segment_id.hex].indexes.append(index)
+
+    recordings_matches.matching_ids.append(matching_id)
+    assert recordings_matches.ByteSize() == 691
 
 
 def test_recordings_to_match_message(recording_message):

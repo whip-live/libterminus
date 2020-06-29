@@ -18,7 +18,8 @@ def encoded_jwt():
 
 @pytest.fixture
 def recording_message():
-    now = datetime.now(timezone.utc)
+    # Calculate timestamp in milliseconds
+    now = datetime(2020, 1, 1, tzinfo=timezone.utc)
     epoch = datetime(1970, 1, 1, tzinfo=timezone.utc)
     # Start an hour ago, end now
     started = (now - epoch - timedelta(hours=1)) // timedelta(milliseconds=1)
