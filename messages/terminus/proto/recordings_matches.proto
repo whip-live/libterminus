@@ -1,0 +1,30 @@
+syntax = "proto3";
+package terminus.recordings_matches;
+
+import "terminus/proto/recording.proto";
+
+message RecordingsMatches {
+  message MatchingSegment {
+    message Index {
+      uint32 start = 1;
+      uint32 end = 2;
+    }
+    repeated Index indexes = 1;
+  }
+
+  message MatchingId {
+    message Matching {
+      bytes matching_id = 1;
+      uint32 start_index = 2;
+      uint32 end_index = 3;
+    }
+
+    bytes segment_id = 1;
+    repeated Matching matchings = 2;
+  }
+
+  terminus.recording.Recording recording = 1;
+  // The key is the segment id
+  map<string, MatchingSegment> matching_segments = 2;
+  repeated MatchingId matching_ids = 3;
+}
