@@ -16,8 +16,8 @@ message Recording {
   message Point {
     int64 time = 2;
     float speed = 3;
-    float position_lat = 4;
-    float position_lon = 5;
+    double position_lat = 4;
+    double position_lon = 5;
     float ele = 6;
     float pdop = 7;
     float hdop = 8;  // used for autopause

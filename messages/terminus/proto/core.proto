@@ -8,6 +8,6 @@ enum Typology {
 
 
 message GeoPath {
-  repeated float lats = 1;
-  repeated float lons = 2;
+  repeated double lats = 1;
+  repeated double lons = 2;
 }
