@@ -18,7 +18,7 @@ def test_areas_to_match(recording_message):
     area.polygon.lats.append(43.0000001)
     area.polygon.lons.append(43.0000001)
     areas_to_match.areas.append(area)
-    assert areas_to_match.ByteSize() == 641
+    assert areas_to_match.ByteSize() == 721
 
 
 def test_recordings_matches(recording_message):
@@ -48,7 +48,7 @@ def test_recordings_matches(recording_message):
     recordings_matches.matching_segments[segment_id.hex].indexes.append(index)
 
     recordings_matches.matching_ids.append(matching_id)
-    assert recordings_matches.ByteSize() == 691
+    assert recordings_matches.ByteSize() == 763
 
 
 def test_recordings_to_match_message(recording_message):
@@ -71,7 +71,7 @@ def test_recordings_to_match_message(recording_message):
     # Test serialization works
     recordings_to_match.SerializeToString()
     # Assert size
-    assert recordings_to_match.ByteSize() == 669
+    assert recordings_to_match.ByteSize() == 765
 
 
 def test_recording_proto_message():
@@ -109,7 +109,7 @@ def test_recording_proto_message():
         recording.points.append(point)
     # Test serialization works
     recording.SerializeToString()
-    assert recording.ByteSize() == 604
+    assert recording.ByteSize() == 676
 
 
 def test_device_data_proto_message():

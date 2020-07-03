@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x19terminus/proto/core.proto\x12\rterminus.core\"%\n\x07GeoPath\x12\x0c\n\x04lats\x18\x01 \x03(\x02\x12\x0c\n\x04lons\x18\x02 \x03(\x02*\x1e\n\x08Typology\x12\x08\n\x04MOTO\x10\x00\x12\x08\n\x04\x42IKE\x10\x01\x62\x06proto3'
+  serialized_pb=b'\n\x19terminus/proto/core.proto\x12\rterminus.core\"%\n\x07GeoPath\x12\x0c\n\x04lats\x18\x01 \x03(\x01\x12\x0c\n\x04lons\x18\x02 \x03(\x01*\x1e\n\x08Typology\x12\x08\n\x04MOTO\x10\x00\x12\x08\n\x04\x42IKE\x10\x01\x62\x06proto3'
 )
 
 _TYPOLOGY = _descriptor.EnumDescriptor(
@@ -64,14 +64,14 @@ _GEOPATH = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='lats', full_name='terminus.core.GeoPath.lats', index=0,
-      number=1, type=2, cpp_type=6, label=3,
+      number=1, type=1, cpp_type=5, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='lons', full_name='terminus.core.GeoPath.lons', index=1,
-      number=2, type=2, cpp_type=6, label=3,
+      number=2, type=1, cpp_type=5, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
