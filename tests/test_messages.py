@@ -18,7 +18,7 @@ def test_areas_to_match(recording_message):
     area.polygon.lats.append(43.0000001)
     area.polygon.lons.append(43.0000001)
     areas_to_match.areas.append(area)
-    assert areas_to_match.ByteSize() == 721
+    assert areas_to_match.ByteSize() == 741
 
 
 def test_recordings_matches(recording_message):
@@ -48,7 +48,7 @@ def test_recordings_matches(recording_message):
     recordings_matches.matching_segments[segment_id.hex].indexes.append(index)
 
     recordings_matches.matching_ids.append(matching_id)
-    assert recordings_matches.ByteSize() == 763
+    assert recordings_matches.ByteSize() == 783
 
 
 def test_recordings_to_match_message(recording_message):
@@ -71,7 +71,7 @@ def test_recordings_to_match_message(recording_message):
     # Test serialization works
     recordings_to_match.SerializeToString()
     # Assert size
-    assert recordings_to_match.ByteSize() == 765
+    assert recordings_to_match.ByteSize() == 785
 
 
 def test_recording_proto_message():
@@ -93,7 +93,7 @@ def test_recording_proto_message():
     recording.id = uuid.uuid4().bytes
     recording.user_id = uuid.uuid4().bytes
     recording.activity_id = uuid.uuid4().bytes
-    recording.device_id = uuid.uuid4().bytes
+    recording.device_id = str(uuid.uuid4())
     recording.started = started
     recording.ended = ended
     # Add some points
@@ -109,7 +109,7 @@ def test_recording_proto_message():
         recording.points.append(point)
     # Test serialization works
     recording.SerializeToString()
-    assert recording.ByteSize() == 676
+    assert recording.ByteSize() == 696
 
 
 def test_device_data_proto_message():
@@ -123,9 +123,9 @@ def test_device_data_proto_message():
     )
     device_data.user_id = uuid.uuid4().bytes
     device_data.activity_id = uuid.uuid4().bytes
-    device_data.device_id = uuid.uuid4().bytes
+    device_data.device_id = str(uuid.uuid4())
     device_data.recording_id = uuid.uuid4().bytes
     device_data.typology = core_pb2.Typology.MOTO
     device_data.content_format = device_data_pb2.DeviceDataFormat.KTM_CSV_1
     device_data.SerializeToString()
-    assert device_data.ByteSize() == 250
+    assert device_data.ByteSize() == 270

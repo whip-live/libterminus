@@ -31,7 +31,7 @@ class RecordingAdapter(logging.LoggerAdapter):
             # The UUIDs are serialized as array of bytes instead of strings
             # because they occupy half the size.
             # See `messages/terminus/proto/recording.proto`
-            extra["device_id"] = str(uuid.UUID(bytes=recording.device_id))
+            extra["device_id"] = recording.device_id
             extra["recording_id"] = str(uuid.UUID(bytes=recording.id))
             # Add to extra metadata the JWT payload
             extra["user"] = get_user_from_jwt(recording.jwt)

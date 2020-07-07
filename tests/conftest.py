@@ -11,9 +11,9 @@ from terminus.proto import core_pb2
 @pytest.fixture
 def encoded_jwt():
     data = {
-        'username': 'user',
+        "username": "user",
     }
-    return jwt.encode(data, '123456', algorithm='HS256')
+    return jwt.encode(data, "123456", algorithm="HS256")
 
 
 @pytest.fixture
@@ -36,7 +36,7 @@ def recording_message():
     recording.id = uuid.uuid4().bytes
     recording.user_id = uuid.uuid4().bytes
     recording.activity_id = uuid.uuid4().bytes
-    recording.device_id = uuid.uuid4().bytes
+    recording.device_id = str(uuid.uuid4())
     recording.started = started
     recording.ended = ended
     # Add some points

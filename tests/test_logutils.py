@@ -17,7 +17,7 @@ def test_logging_adapter(encoded_jwt):
     device_id = uuid.uuid4()
     recording = recording_pb2.Recording()
     recording.id = recording_id.bytes
-    recording.device_id = device_id.bytes
+    recording.device_id = str(device_id)
     recording.jwt = encoded_jwt
     adapter = RecordingAdapter(logging.getLogger(), None)
     log_result = adapter.process("test msg", {"recording": recording})
@@ -94,7 +94,7 @@ def test_jwt_without_username():
 
 
 @patch("terminus.logutils.JSONDatagramHandler.send")
-def test_loghadler_send_JSON(fake_send, encoded_jwt):
+def test_loghandler_send_JSON(fake_send, encoded_jwt):
     logger = logging.getLogger(__name__)
     logger = RecordingAdapter(logger, None)
 
@@ -108,7 +108,7 @@ def test_loghadler_send_JSON(fake_send, encoded_jwt):
     device_id = uuid.uuid4()
     recording = recording_pb2.Recording()
     recording.id = recording_id.bytes
-    recording.device_id = device_id.bytes
+    recording.device_id = str(device_id)
     recording.jwt = encoded_jwt
 
     logger.error("Test log message", recording=recording)
