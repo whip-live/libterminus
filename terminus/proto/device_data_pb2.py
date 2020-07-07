@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n terminus/proto/device_data.proto\x12\x14terminus.device_data\x1a\x19terminus/proto/core.proto\"\xe4\x01\n\nDeviceData\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\x0c\x12\x0b\n\x03jwt\x18\x02 \x01(\t\x12\x0f\n\x07user_id\x18\x03 \x01(\x0c\x12\x13\n\x0b\x61\x63tivity_id\x18\x04 \x01(\x0c\x12\x11\n\tdevice_id\x18\x05 \x01(\x0c\x12\x14\n\x0crecording_id\x18\x06 \x01(\x0c\x12)\n\x08typology\x18\x07 \x01(\x0e\x32\x17.terminus.core.Typology\x12>\n\x0e\x63ontent_format\x18\x08 \x01(\x0e\x32&.terminus.device_data.DeviceDataFormat*D\n\x10\x44\x65viceDataFormat\x12\x0b\n\x07LIVEX_1\x10\x00\x12\t\n\x05\x41PP_1\x10\x01\x12\t\n\x05\x41PP_2\x10\x02\x12\r\n\tKTM_CSV_1\x10\x03\x62\x06proto3'
+  serialized_pb=b'\n terminus/proto/device_data.proto\x12\x14terminus.device_data\x1a\x19terminus/proto/core.proto\"\xe4\x01\n\nDeviceData\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\x0c\x12\x0b\n\x03jwt\x18\x02 \x01(\t\x12\x0f\n\x07user_id\x18\x03 \x01(\x0c\x12\x13\n\x0b\x61\x63tivity_id\x18\x04 \x01(\x0c\x12\x11\n\tdevice_id\x18\x05 \x01(\t\x12\x14\n\x0crecording_id\x18\x06 \x01(\x0c\x12)\n\x08typology\x18\x07 \x01(\x0e\x32\x17.terminus.core.Typology\x12>\n\x0e\x63ontent_format\x18\x08 \x01(\x0e\x32&.terminus.device_data.DeviceDataFormat*D\n\x10\x44\x65viceDataFormat\x12\x0b\n\x07LIVEX_1\x10\x00\x12\t\n\x05\x41PP_1\x10\x01\x12\t\n\x05\x41PP_2\x10\x02\x12\r\n\tKTM_CSV_1\x10\x03\x62\x06proto3'
   ,
   dependencies=[terminus_dot_proto_dot_core__pb2.DESCRIPTOR,])
 
@@ -106,8 +106,8 @@ _DEVICEDATA = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='device_id', full_name='terminus.device_data.DeviceData.device_id', index=4,
-      number=5, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"",
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),

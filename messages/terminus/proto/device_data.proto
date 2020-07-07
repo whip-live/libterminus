@@ -8,7 +8,7 @@ message DeviceData {
   string jwt = 2;
   bytes user_id = 3;
   bytes activity_id = 4;
-  bytes device_id = 5;
+  string device_id = 5;
   bytes recording_id = 6;
   terminus.core.Typology typology = 7;
   DeviceDataFormat content_format = 8;

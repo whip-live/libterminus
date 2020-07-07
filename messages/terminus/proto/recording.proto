@@ -9,7 +9,7 @@ message Recording {
   bytes id = 3;
   bytes user_id = 4;
   bytes activity_id = 5;
-  bytes device_id = 6;
+  string device_id = 6;
   int64 started = 7;
   int64 ended = 8;
 
