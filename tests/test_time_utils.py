@@ -23,3 +23,10 @@ def test_milliseconds_to_datetime():
         2018, 1, 1, 16, 40, 34, 456000, tzinfo=timezone.utc
     )
     assert datetime_instance == expected_datetime_instance
+
+
+def test_milliseconds_from_datetime_naive():
+    """ Test that if we pass a naive datetime, utc is assumed. """
+    dd = datetime(2018, 1, 1, 16, 40, 34, 456000)
+    milliseconds = time.milliseconds_from_datetime(dd)
+    assert milliseconds == 1514824834456

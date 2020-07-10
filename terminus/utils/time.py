@@ -14,6 +14,12 @@ _epoch = datetime(1970, 1, 1, tzinfo=timezone.utc)
 
 def milliseconds_from_datetime(datetime_instance):
     """Convert a datetime object to milliseconds."""
+    # https://docs.python.org/3/library/datetime.html#determining-if-an-object-is-aware-or-naive
+    if (
+        datetime_instance.tzinfo is None
+        or datetime_instance.tzinfo.utcoffset(datetime_instance) is None
+    ):
+        datetime_instance = datetime_instance.replace(tzinfo=timezone.utc)
     # POSIX epoch
     return (datetime_instance - _epoch) // timedelta(milliseconds=1)
 
