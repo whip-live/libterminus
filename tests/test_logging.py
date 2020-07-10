@@ -8,7 +8,7 @@ def test_setup_logging():
     """
     Test that setup_logging function configures loggers as expected.
     """
-    setup_logging('test', 'ERROR', 'foo', '3296')
+    setup_logging("test", "ERROR", "foo", "3296")
     # check `test` logger has ERROR level
-    logger = logging.getLogger('test')
+    logger = logging.getLogger("test")
     assert logger.getEffectiveLevel() == logging.ERROR

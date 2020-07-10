@@ -5,15 +5,13 @@ from marshmallow import fields, Schema, validate, ValidationError
 
 def validate_jwt(value):
     try:
-        jwt.decode(value, verify=False, algorithms=['HS256'])
+        jwt.decode(value, verify=False, algorithms=["HS256"])
     except jwt.exceptions.DecodeError:
-        raise ValidationError('Invalid JWT')
+        raise ValidationError("Invalid JWT")
 
 
 class PolygonSchema(Schema):
-    coordinates = fields.List(
-        fields.List(fields.List(fields.Decimal), required=True)
-    )
+    coordinates = fields.List(fields.List(fields.List(fields.Decimal), required=True))
 
 
 class AreaSchema(Schema):
@@ -27,12 +25,14 @@ class AreaSchema(Schema):
 
 class DeviceDataSchema(Schema):
     jwt = fields.Field(required=True, validate=validate_jwt)
-    typology = fields.String(required=True, validate=validate.OneOf(['moto', 'bike']))
+    typology = fields.String(required=True, validate=validate.OneOf(["moto", "bike"]))
     device_id = fields.UUID(required=True)
     recording_id = fields.UUID(required=True)
     user_id = fields.UUID(required=True)
     activity_id = fields.UUID(required=True)
-    content_format = fields.String(required=True, validate=validate.OneOf(['livex-1', 'app-1', 'app-2']))
+    content_format = fields.String(
+        required=True, validate=validate.OneOf(["livex-1", "app-1", "app-2"])
+    )
 
 
 class PointSchema(Schema):
@@ -58,8 +58,9 @@ class RecordingSchema(Schema):
     """
     Data structure expected in `recordings` (mallow, sutt)
     """
+
     jwt = fields.Field(required=True, validate=validate_jwt)
-    typology = fields.String(required=True, validate=validate.OneOf(['moto', 'bike']))
+    typology = fields.String(required=True, validate=validate.OneOf(["moto", "bike"]))
     id = fields.UUID(required=True)
     user_id = fields.UUID(required=True)
     activity_id = fields.UUID(required=True)
@@ -71,12 +72,16 @@ class RecordingSchema(Schema):
 
 class AreasToMatch(Schema):
     areas = fields.Nested(
-        AreaSchema, many=True, required=True,
-        validate=validate.Length(min=1, error='At least one area needed')
+        AreaSchema,
+        many=True,
+        required=True,
+        validate=validate.Length(min=1, error="At least one area needed"),
     )
     recordings = fields.Nested(
-        RecordingSchema, many=True, required=True,
-        validate=validate.Length(min=1, error='At least one recording needed')
+        RecordingSchema,
+        many=True,
+        required=True,
+        validate=validate.Length(min=1, error="At least one recording needed"),
     )
 
 
@@ -84,7 +89,8 @@ class SerializedRecordingSchema(Schema):
     """
     Data structure expected in `recordings` (bliss)
     """
-    typology = fields.String(required=True, validate=validate.OneOf(['moto', 'bike']))
+
+    typology = fields.String(required=True, validate=validate.OneOf(["moto", "bike"]))
     id = fields.UUID(required=True)
     device_id = fields.UUID(required=True)
     started = fields.DateTime(required=True)
@@ -96,6 +102,7 @@ class SegmentSchema(Schema):
     """
     Data structure for a segment
     """
+
     id = fields.UUID(required=True)
     name = fields.String(required=True)
     public = fields.Bool(required=True)
@@ -103,20 +110,29 @@ class SegmentSchema(Schema):
     path = fields.Nested(LineStringSchema, required=True)
     start_line = fields.Nested(LineStringSchema, required=True)
     end_line = fields.Nested(LineStringSchema, required=True)
-    sectors = fields.Nested('SectorSchema', many=True, required=True)
-    track_type = fields.String(required=True, validate=validate.OneOf(['dirt', 'rock', 'sand']))
+    sectors = fields.Nested("SectorSchema", many=True, required=True)
+    track_type = fields.String(
+        required=True, validate=validate.OneOf(["dirt", "rock", "sand"])
+    )
 
 
 class RecordingsToMatchSchema(Schema):
     """
     Data structure for the RecordingsToMatchSchema
     """
+
     recordings = fields.Nested(
-        SerializedRecordingSchema, many=True, required=True,
-        validate=validate.Length(min=1, error='At least one recording needed'))
+        SerializedRecordingSchema,
+        many=True,
+        required=True,
+        validate=validate.Length(min=1, error="At least one recording needed"),
+    )
     segments = fields.Nested(
-        SegmentSchema, many=True, required=True,
-        validate=validate.Length(min=1, error='At least one segment needed'))
+        SegmentSchema,
+        many=True,
+        required=True,
+        validate=validate.Length(min=1, error="At least one segment needed"),
+    )
 
 
 class PathProposalSchema(RecordingSchema):
@@ -124,6 +140,7 @@ class PathProposalSchema(RecordingSchema):
     Data structure expected in `path_proposal` (sutt, bliss, isaac)
     Same as RecordingSchema, with 'path' field added
     """
+
     path = fields.Nested(LineStringSchema, required=True)
 
 
@@ -134,6 +151,7 @@ class MatchRecordingSchema(Schema):
     `recording_matches` is a tuple composed by 3 elements: recording,
     matching_segments, matching_ids. This is the first part
     """
+
     id = fields.UUID(required=True)
     user_id = fields.UUID(required=True)
     activity_id = fields.UUID(required=True)
@@ -164,6 +182,7 @@ class MatchingSegmentSchema(Schema):
     `recording_matches` is a tuple composed by 3 elements: recording,
     matching_segments, matching_ids. This is the second part
     """
+
     segment_id = fields.Nested(MatchSchema)
 
 
@@ -181,5 +200,6 @@ class MatchIndexSchema(Schema):
     `recording_matches` is a tuple composed by 3 elements: recording,
     matching_segments, matching_ids. This is the third part
     """
+
     segment_id = fields.UUID(required=True)
     matchings = fields.Nested(SegmentMatchingsSchema, many=True, required=True)

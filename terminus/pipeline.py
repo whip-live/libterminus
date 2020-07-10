@@ -5,6 +5,7 @@ class Pipeline:
     """
     Class to build and run our pipeline
     """
+
     def __init__(self):
         self.steps = []
 

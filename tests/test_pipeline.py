@@ -7,6 +7,7 @@ def test_pipeline():
     By adding 2 generators `doubles()` and `upper()`
     What we expect is a call like this `upper(doubles([1, 5, 10]))`
     """
+
     def doubles(data):
         for i in data:
             yield i * 2
