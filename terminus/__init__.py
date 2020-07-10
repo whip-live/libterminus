@@ -22,7 +22,7 @@ def setup_logging(
     LOGGING = {
         "version": 1,
         "disable_existing_loggers": False,
-        "root": {"level": "ERROR", "handlers": ["console", "ddagent"],},
+        "root": {"level": "ERROR", "handlers": ["console", "ddagent"]},
         "loggers": {
             service_name: {
                 "level": service_level,
@@ -30,9 +30,9 @@ def setup_logging(
                 "propagate": False,
             },
         },
-        "formatters": {"simple": {"format": "%(levelname)s %(name)s %(message)s"},},
+        "formatters": {"simple": {"format": "%(levelname)s %(name)s %(message)s"}},
         "handlers": {
-            "console": {"class": "logging.StreamHandler", "formatter": "simple",},
+            "console": {"class": "logging.StreamHandler", "formatter": "simple"},
             "ddagent": {
                 "class": "terminus.logutils.JSONDatagramHandler",
                 "host": ddagent_host,
