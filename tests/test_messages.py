@@ -107,9 +107,16 @@ def test_recording_proto_message():
         point.pdop = i
         point.hdop = i * 0.1
         recording.points.append(point)
+
+        ccu2_data_point = recording.ccu2_data_points.add()
+        ccu2_data_point.gear = 1
+        ccu2_data_point.rpm = 1000
+        ccu2_data_point.throttle = 120
+        ccu2_data_point.mapswitchmode = 2
+
     # Test serialization works
     recording.SerializeToString()
-    assert recording.ByteSize() == 696
+    assert recording.ByteSize() == 806
 
 
 def test_device_data_proto_message():

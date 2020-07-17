@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x1eterminus/proto/recording.proto\x12\x12terminus.recording\x1a\x19terminus/proto/core.proto\"\xd8\x02\n\tRecording\x12\x0b\n\x03jwt\x18\x01 \x01(\t\x12)\n\x08typology\x18\x02 \x01(\x0e\x32\x17.terminus.core.Typology\x12\n\n\x02id\x18\x03 \x01(\x0c\x12\x0f\n\x07user_id\x18\x04 \x01(\x0c\x12\x13\n\x0b\x61\x63tivity_id\x18\x05 \x01(\x0c\x12\x11\n\tdevice_id\x18\x06 \x01(\t\x12\x0f\n\x07started\x18\x07 \x01(\x03\x12\r\n\x05\x65nded\x18\x08 \x01(\x03\x12\x33\n\x06points\x18\t \x03(\x0b\x32#.terminus.recording.Recording.Point\x1ay\n\x05Point\x12\x0c\n\x04time\x18\x02 \x01(\x03\x12\r\n\x05speed\x18\x03 \x01(\x02\x12\x14\n\x0cposition_lat\x18\x04 \x01(\x01\x12\x14\n\x0cposition_lon\x18\x05 \x01(\x01\x12\x0b\n\x03\x65le\x18\x06 \x01(\x02\x12\x0c\n\x04pdop\x18\x07 \x01(\x02\x12\x0c\n\x04hdop\x18\x08 \x01(\x02\x62\x06proto3'
+  serialized_pb=b'\n\x1eterminus/proto/recording.proto\x12\x12terminus.recording\x1a\x19terminus/proto/core.proto\"\xf4\x03\n\tRecording\x12\x0b\n\x03jwt\x18\x01 \x01(\t\x12)\n\x08typology\x18\x02 \x01(\x0e\x32\x17.terminus.core.Typology\x12\n\n\x02id\x18\x03 \x01(\x0c\x12\x0f\n\x07user_id\x18\x04 \x01(\x0c\x12\x13\n\x0b\x61\x63tivity_id\x18\x05 \x01(\x0c\x12\x11\n\tdevice_id\x18\x06 \x01(\t\x12\x0f\n\x07started\x18\x07 \x01(\x03\x12\r\n\x05\x65nded\x18\x08 \x01(\x03\x12\x33\n\x06points\x18\t \x03(\x0b\x32#.terminus.recording.Recording.Point\x12\x45\n\x10\x63\x63u2_data_points\x18\n \x03(\x0b\x32+.terminus.recording.Recording.CCU2DataPoint\x1ay\n\x05Point\x12\x0c\n\x04time\x18\x02 \x01(\x03\x12\r\n\x05speed\x18\x03 \x01(\x02\x12\x14\n\x0cposition_lat\x18\x04 \x01(\x01\x12\x14\n\x0cposition_lon\x18\x05 \x01(\x01\x12\x0b\n\x03\x65le\x18\x06 \x01(\x02\x12\x0c\n\x04pdop\x18\x07 \x01(\x02\x12\x0c\n\x04hdop\x18\x08 \x01(\x02\x1aS\n\rCCU2DataPoint\x12\x0c\n\x04gear\x18\x01 \x01(\x05\x12\x0b\n\x03rpm\x18\x02 \x01(\x05\x12\x10\n\x08throttle\x18\x03 \x01(\x05\x12\x15\n\rmapswitchmode\x18\x04 \x01(\x05\x62\x06proto3'
   ,
   dependencies=[terminus_dot_proto_dot_core__pb2.DESCRIPTOR,])
 
@@ -96,8 +96,60 @@ _RECORDING_POINT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=305,
-  serialized_end=426,
+  serialized_start=376,
+  serialized_end=497,
+)
+
+_RECORDING_CCU2DATAPOINT = _descriptor.Descriptor(
+  name='CCU2DataPoint',
+  full_name='terminus.recording.Recording.CCU2DataPoint',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='gear', full_name='terminus.recording.Recording.CCU2DataPoint.gear', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='rpm', full_name='terminus.recording.Recording.CCU2DataPoint.rpm', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='throttle', full_name='terminus.recording.Recording.CCU2DataPoint.throttle', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='mapswitchmode', full_name='terminus.recording.Recording.CCU2DataPoint.mapswitchmode', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=499,
+  serialized_end=582,
 )
 
 _RECORDING = _descriptor.Descriptor(
@@ -171,10 +223,17 @@ _RECORDING = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='ccu2_data_points', full_name='terminus.recording.Recording.ccu2_data_points', index=9,
+      number=10, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
-  nested_types=[_RECORDING_POINT, ],
+  nested_types=[_RECORDING_POINT, _RECORDING_CCU2DATAPOINT, ],
   enum_types=[
   ],
   serialized_options=None,
@@ -184,12 +243,14 @@ _RECORDING = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=82,
-  serialized_end=426,
+  serialized_end=582,
 )
 
 _RECORDING_POINT.containing_type = _RECORDING
+_RECORDING_CCU2DATAPOINT.containing_type = _RECORDING
 _RECORDING.fields_by_name['typology'].enum_type = terminus_dot_proto_dot_core__pb2._TYPOLOGY
 _RECORDING.fields_by_name['points'].message_type = _RECORDING_POINT
+_RECORDING.fields_by_name['ccu2_data_points'].message_type = _RECORDING_CCU2DATAPOINT
 DESCRIPTOR.message_types_by_name['Recording'] = _RECORDING
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -201,12 +262,20 @@ Recording = _reflection.GeneratedProtocolMessageType('Recording', (_message.Mess
     # @@protoc_insertion_point(class_scope:terminus.recording.Recording.Point)
     })
   ,
+
+  'CCU2DataPoint' : _reflection.GeneratedProtocolMessageType('CCU2DataPoint', (_message.Message,), {
+    'DESCRIPTOR' : _RECORDING_CCU2DATAPOINT,
+    '__module__' : 'terminus.proto.recording_pb2'
+    # @@protoc_insertion_point(class_scope:terminus.recording.Recording.CCU2DataPoint)
+    })
+  ,
   'DESCRIPTOR' : _RECORDING,
   '__module__' : 'terminus.proto.recording_pb2'
   # @@protoc_insertion_point(class_scope:terminus.recording.Recording)
   })
 _sym_db.RegisterMessage(Recording)
 _sym_db.RegisterMessage(Recording.Point)
+_sym_db.RegisterMessage(Recording.CCU2DataPoint)
 
 
 # @@protoc_insertion_point(module_scope)

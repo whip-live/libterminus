@@ -24,4 +24,13 @@ message Recording {
   }
 
   repeated Point points = 9;
+
+  message CCU2DataPoint {
+    int32 gear = 1;
+    int32 rpm = 2;
+    int32 throttle = 3;
+    int32 mapswitchmode = 4;
+  }
+
+  repeated CCU2DataPoint ccu2_data_points = 10;
 }
