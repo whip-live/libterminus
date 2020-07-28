@@ -13,6 +13,18 @@ from logging.config import dictConfig
 LOGGING_LEVELS = list(logging._levelToName.values())
 
 
+# Define allowed priority levels to be used when consuming or publishing
+# to PubSub topics
+PRIORITY_LEVEL_LOW = "low"
+PRIORITY_LEVEL_MEDIUM = "medium"
+PRIORITY_LEVEL_HIGH = "high"
+PRIORITY_LEVELS = (
+    PRIORITY_LEVEL_LOW,
+    PRIORITY_LEVEL_MEDIUM,
+    PRIORITY_LEVEL_HIGH,
+)
+
+
 def setup_logging(
     service_name, service_level="DEBUG", ddagent_host="localhost", ddagent_port=10518
 ):
