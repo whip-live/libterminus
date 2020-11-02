@@ -25,32 +25,30 @@ PRIORITY_LEVELS = (
 )
 
 
-def setup_logging(
-    service_name, service_level="DEBUG", ddagent_host="localhost", ddagent_port=10518
-):
+def setup_logging(service_name, service_level="DEBUG"):
     """
     Setup the logger for a service named `service_name`.
     """
     LOGGING = {
         "version": 1,
         "disable_existing_loggers": False,
-        "root": {"level": "ERROR", "handlers": ["console", "ddagent"]},
+        "root": {"level": "ERROR", "handlers": ["console"]},
         "loggers": {
             service_name: {
                 "level": service_level,
-                "handlers": ["console", "ddagent"],
+                "handlers": ["console"],
                 "propagate": False,
             },
         },
-        "formatters": {"simple": {"format": "%(levelname)s %(name)s %(message)s"}},
-        "handlers": {
-            "console": {"class": "logging.StreamHandler", "formatter": "simple"},
-            "ddagent": {
-                "class": "terminus.logutils.JSONDatagramHandler",
-                "host": ddagent_host,
-                "port": ddagent_port,
-                "service": service_name,
+        "formatters": {
+            "simple": {"format": "%(levelname)s %(name)s %(message)s"},
+            "json": {
+                "format": "%(levelname)s %(asctime)s %(name)s %(message)s",
+                "class": "pythonjsonlogger.jsonlogger.JsonFormatter",
             },
+        },
+        "handlers": {
+            "console": {"class": "logging.StreamHandler", "formatter": "json"},
         },
     }
     dictConfig(LOGGING)
