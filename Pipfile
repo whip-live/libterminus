@@ -15,4 +15,4 @@ python_version = "3.7"
 [packages]
 google-api-core = "~=1.8"
 python-json-logger = "~=2.0.1"
-pyjwt = "~=1.7"
+pyjwt = "~=2.4"
